@@ -1,0 +1,21 @@
+<div class="grid-item">
+  {% if profile.redirect %}
+  <a href="{{ profile.redirect }}">
+    {% else %}
+    <a href="{{ profile.url | relative_url }}">
+      {% endif %}
+      <div class="card hoverable">
+        {% if profile.image %}
+        {% responsive_image_block %}
+        path: {{ profile.image }}
+        alt: "profile thumbnail"
+        {% endresponsive_image_block %}
+        {% elsif profile.img_url %}
+        <img src="{{profile.img_url}}" alt="{{profile.img_url}}" />
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ profile.title }}</h5>
+        </div>
+      </div>
+    </a>
+</div>

@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+<div class="post">
+    <header class="post-header">
+        <h1 class="post-title">
+            {% if page.title == "blank" %}
+                <span class="font-weight-bold">{{ page.first_name }}</span>
+                {{page.middle_name }}
+                {{ page.last_name }}
+            {% else %}
+                {{ page.title }}
+            {% endif %}
+        </h1>
+        <p class="desc">{{ page.description }}</p>
+    </header>
+
+    <article>
+        <div class="profile float-{% if page.align == 'left' %}left{% else %}right{% endif %}">
+            {% if page.image %}
+                {% responsive_image_block %}
+                path:
+                {{ page.image }}
+                class: "img-fluid z-depth-1 rounded"
+                                                                                                                      alt:
+                {{ page.image }}
+                {% endresponsive_image_block %}
+            {% else if page.img_url %}
+                <img src="{{page.img_url}}" alt="{{page.img_url}}"/>
+            {% endif %}
+            {% if page.address %}
+                <div class="address">
+                    {{ page.address }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if page.ias_id %}
+            <p>You will be redirected to the WEB SITE of IAS within 3 seconds. If not redirected, please click
+                <a href="https://ias.szu.edu.cn/info/{{page.ias_id}}.htm">here</a>.
+            </p>
+            <script>
+              (function() {
+                window.location.replace = "https://ias.szu.edu.cn/info/{{page.ias_id}}.htm"
+              })()
+            </script>
+        {% endif %}
+
+        <div class="clearfix">
+            {{ content }}
+        </div>
+
+        {% if page.news %}
+            {% include news.html %}
+        {% endif %}
+
+        {% if page.selected_papers %}
+            {% include selected_papers.html %}
+        {% endif %}
+
+        {% if page.social %}
+            <div class="social">
+                <div class="contact-icons">
+                    {% include social.html %}
+                </div>
+                <div class="contact-note">{{ page.contact_note }}</div>
+            </div>
+        {% endif %}
+    </article>
+</div>
