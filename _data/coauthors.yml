@@ -1,18 +1,15 @@
-"Adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
+"Chen":
+  - firstname: ["Y.", "Yani", "Ya ni"]
+    url: https://scholar.google.com/citations?hl=en&user=YcLz1IMAAAAJ
 
-"Podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
+"Ma":
+  - firstname: ["J.", "Jin long"]
+    url: https://scholar.google.com/citations?user=3sQLi-MAAAAJ&hl=en
 
-"Rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
+"Yang":
+  - firstname: ["X.", "Xiao long"]
+    url: https://scholar.google.com/citations?hl=en&user=2hSEWTIAAAAJ
 
-"Bach": 
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
-
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
+"Kundu":
+  - firstname: ["A.", "Ashis"]
+    url: https://scholar.google.com/citations?hl=en&user=BFVZLLUAAAAJ

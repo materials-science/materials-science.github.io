@@ -40,10 +40,10 @@ layout: default
             <p>You will be redirected to the WEB SITE of IAS within 3 seconds. If not redirected, please click
                 <a href="https://ias.szu.edu.cn/info/{{page.ias_id}}.htm">here</a>.
             </p>
-            <script>
+            <script type="text/javascript">
               (function() {
                 window.location.replace = "https://ias.szu.edu.cn/info/{{page.ias_id}}.htm"
-              })()
+              })();
             </script>
         {% endif %}
 
