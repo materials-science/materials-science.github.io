@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-description: <a href="#">Institute for Advanced Study</a>. Shenzhen University,Nanshan District Shenzhen,Guangdong,China 518060. Contacts 0755-26530611.
+description: <a href="https://ias.szu.edu.cn/">Institute for Advanced Study</a>. Shenzhen University,Nanshan District Shenzhen,Guangdong,China 518060. Contacts 0755-26530611.
 
 align: right
 image: prof_pic.jpg
