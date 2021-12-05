@@ -3,7 +3,7 @@ layout: page
 title: Fourthorder
 description: In analogy with thirdorder.py in ShengBTE, Fourthorder.py is developed to calculate fourth-order interatomic force-constants (4th-IFCs). Please post your questions in the 'Discussion' section of FourPhonon repository.
 img: assets/img/FourPhonon.png
-importance: 2
+importance: 3
 category: works
 github: https://github.com/FourPhonon/Fourthorder
 redirect: https://github.com/FourPhonon/Fourthorder

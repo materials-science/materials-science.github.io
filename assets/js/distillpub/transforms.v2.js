@@ -12708,7 +12708,9 @@ window.addEventListener('WebComponentsReady', function() {
 
     // add loader
     const loaderTag = dom.createElement('script');
-    loaderTag.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.17/webcomponents-loader.js';
+    // loaderTag.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.17/webcomponents-loader.js';
+    loaderTag.src = 'https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@1.0.17/webcomponents-loader.js';
+    
     dom.head.insertBefore(loaderTag, dom.head.firstChild);
 
     // add loader event listener to add tempalrte back in

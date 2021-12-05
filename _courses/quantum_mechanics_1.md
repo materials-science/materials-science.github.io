@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Quantum Mechanics I
-description:
+description: Prof. Li Wu
 img:
 importance: 1
 category: compulsory

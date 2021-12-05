@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Atomic Physics
-description:
+description: Prof. Li Wu
 img: assets/img/course_atomic_physics_content.png
 importance: 1
 category: optional

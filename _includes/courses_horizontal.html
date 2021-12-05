@@ -33,6 +33,12 @@
                 </span>
                 {% endif %}
               </div>
+              {% elsif course.bitbucket %}
+                            <div class="github-icon">
+                                <div class="icon" data-toggle="tooltip" title="Code Repository">
+                                <a href="{{ course.bitbucket }}"><i class="fab fa-bitbucket gh-icon"></i></a>
+                                </div>
+                            </div>
               {% endif %}
             </div>
           </div>

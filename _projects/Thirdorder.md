@@ -2,7 +2,7 @@
 layout: page
 title: Thirdorder
 description: A Python script to help create input files for computing anhamonic interatomic force constants.
-importance: 1
+importance: 2
 category: works
 bitbucket: https://bitbucket.org/sousaw/thirdorder
 ---

@@ -20,6 +20,7 @@ url: https://materials-science.github.io # the base hostname & protocol for your
 baseurl: / # the subpath of your site, e.g. /blog/
 last_updated: true # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
+cdn: jsdelivr # default is cloudflare
 
 # -----------------------------------------------------------------------------
 # RSS Feed
@@ -246,7 +247,7 @@ enable_panelbear_analytics: false # enables panelbear analytics
 enable_mansory: true # enables automatic project cards arangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips:
-  false # enables automatic tooltip links generated
+  true # enables automatic tooltip links generated
   # for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social:
