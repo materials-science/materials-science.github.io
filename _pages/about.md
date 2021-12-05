@@ -14,7 +14,7 @@ display_categories: [Prof., postdoc, former-postdoc]
 ---
 
 <div class="profiles">
-  <h2>Teams</h2>
+  <h2>People</h2>
   {% for category in page.display_categories %}
   <h2 class="category">{{ category }}</h2>
   {% assign categorized_profiles = site.profiles | where: "category", category %}

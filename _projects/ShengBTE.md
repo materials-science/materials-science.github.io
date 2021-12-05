@@ -6,6 +6,7 @@ img: assets/img/shengbte-flow.png
 importance: 1
 category: works
 bitbucket: https://bitbucket.org/sousaw/shengbte
+redirect: https://www.shengbte.org
 ---
 
 <div class="tyJCtd mGzaTb baZpAe">

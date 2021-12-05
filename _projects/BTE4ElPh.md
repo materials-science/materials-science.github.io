@@ -3,7 +3,7 @@ layout: page
 title: BTE4ElPh
 description: 计算周期性体系中受电子声子（el-ph）耦合限制的电输运性质
 img: assets/img/bte4elph.png
-importance: 2
+importance: 1
 category: works
 ---
 

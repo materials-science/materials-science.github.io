@@ -1,31 +1,60 @@
 ---
 layout: page
-permalink: /teaching/
 title: Teaching
-description: Courses were given
+permalink: /teaching/
+description: Giving Cources.
 nav: true
-_styles: >
-    img{
-      max-width: 50% !important
-    }
-toc:
-    - name: Atomic Physics
-    - name: Quantum Mechanics I
+display_categories: [compulsory, optional]
+horizontal: true
 ---
 
----
+<div class="courses">
+  {% if site.enable_course_categories and page.display_categories %}
+  <!-- Display categorized courses -->
+    {% for category in page.display_categories %}
+      <h2 class="category">{{ category }}</h2>
+      {% assign categorized_courses = site.courses | where: "category", category %}
+      {% assign sorted_courses = categorized_courses | sort: "importance" %}
+      <!-- Generate cards for each course -->
+      {% if page.horizontal %}
+        <div class="container">
+          <div class="row row-cols-2">
+          {% for course in sorted_courses %}
+            {% include courses_horizontal.html %}
+          {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="grid">
+          {% for course in sorted_courses %}
+            {% include courses.html %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
 
----
+{% else %}
 
-## _Atomic Physics_
+  <!-- Display courses without categories -->
 
-    {% responsive_image path: "assets/img/course_atomic_physics_content.png" alt: "course thumbnail" class: "img-fluid rounded z-depth-1" zoomable: true %}
+    {% assign sorted_courses = site.courses | sort: "importance" %}
+    <!-- Generate cards for each course -->
+    {% if page.horizontal %}
+      <div class="container">
+        <div class="row row-cols-2">
+        {% for course in sorted_courses %}
+          {% include courses_horizontal.html %}
+        {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="grid">
+        {% for course in sorted_courses %}
+          {% include courses.html %}
+        {% endfor %}
+      </div>
+    {% endif %}
 
--   [Chapter 1](/assets/pdf/atomic_physics/chapter01.pdf)
--   [Chapter 2](/assets/pdf/atomic_physics/chapter02.pdf)
+{% endif %}
 
-## _Quantum Mechanics I_
-
--   [Problem 1](/assets/pdf/quamtum_machanics_1/Problems Quantum Mechanics I 1.pdf)
--   [Problem 2](/assets/pdf/quamtum_machanics_1/Problems Quantum Mechanics I 2.pdf)
--   [Problem 3](/assets/pdf/quamtum_machanics_1/Problems Quantum Mechanics I 3.pdf)
+</div>

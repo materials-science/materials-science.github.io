@@ -1,6 +1,17 @@
 ---
 layout: default
 ---
+{% if page.redirect_url %}
+    <p>You will be redirected to the WEB SITE {{page.redirect_url}} within 3 seconds. If not redirected, please click
+        <a href="{{page.redirect_url}}">here</a>.
+    </p>
+    <script type="text/javascript">
+        (function() {
+        window.location.replace("{{page.redirect_url}}")
+        })();
+    </script>
+{% endif %}
+
 {% if page._styles %}
   <style type="text/css">
     {{page._styles}}

@@ -118,7 +118,7 @@ blockquote {
 
 	.card {
 		img {
-			width: 120px;
+			width: 150px;
 			height: 150px;
 		}
 		.card-body {
@@ -142,7 +142,7 @@ blockquote {
 	}
 
 	.grid-item {
-		width: 120px;
+		width: 150px;
 		margin-bottom: 5px;
 	}
 
@@ -388,9 +388,10 @@ footer.sticky-bottom {
 	}
 }
 
-// Projects
+// Projects, Courses
 
-.projects {
+.projects,
+.courses {
 	a {
 		text-decoration: none;
 
@@ -475,9 +476,9 @@ footer.sticky-bottom {
 					background-color: var(--global-theme-color);
 					// padding-left: 1rem;
 					// padding-right: 1rem;
-                    width: 100%;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
+					width: 100%;
+					text-overflow: ellipsis;
+					overflow: hidden;
 					a {
 						color: white;
 						&:hover {
