@@ -109,26 +109,6 @@ $darkenBG: darken($bgColorDark, 10%);
 	}
 }
 
-@media screen and (max-height: 800px), (max-width: 600px) {
-	.header {
-		height: unset;
-		// min-height: 400px;
-		font-size: 1rem;
-		#cmap {
-			display: none;
-		}
-		&__title {
-			position: unset;
-		}
-		&__description {
-			position: unset;
-			margin: 1rem auto;
-			width: 80%;
-			height: unset;
-		}
-	}
-}
-
 .main {
 	background-image: url("https://s2.loli.net/2022/06/07/Dej451T2gSvqWy8.jpg");
 	background-size: contain;
@@ -221,6 +201,11 @@ $darkenBG: darken($bgColorDark, 10%);
 			> img {
 				width: 50%;
 			}
+			> p {
+				width: 50%;
+				white-space: pre-line;
+				font-size: 0.8rem;
+			}
 			top: 0;
 			bottom: 0;
 			left: 0;
@@ -229,14 +214,55 @@ $darkenBG: darken($bgColorDark, 10%);
 
 		.rel_link {
 			flex: 1 200px;
+			padding: 0;
+			margin: 0;
+			li {
+				list-style-type: none;
+			}
 			h3 {
 				margin-top: 0;
 			}
-			ul {
-				padding: 0;
-				margin: 0;
-				li {
-					list-style-type: none;
+		}
+	}
+}
+
+@media screen and (max-height: 800px), (max-width: 600px) {
+	.nav {
+		&__logos {
+			margin: 0 auto;
+		}
+		&__list {
+			display: none;
+		}
+	}
+	.header {
+		height: unset;
+		// min-height: 400px;
+		font-size: 1rem;
+		#cmap {
+			display: none;
+		}
+		&__title {
+			position: unset;
+		}
+		&__description {
+			position: unset;
+			margin: 1rem auto;
+			width: 80%;
+			height: unset;
+		}
+	}
+	.location__btn {
+		text-align: center;
+	}
+
+	.footer {
+		.info {
+			flex-direction: column;
+			text-align: center;
+			.logo {
+				> p {
+					width: 100%;
 				}
 			}
 		}

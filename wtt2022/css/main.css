@@ -127,25 +127,6 @@
   line-height: 1.5rem;
 }
 
-@media screen and (max-height: 800px), (max-width: 600px) {
-  .header {
-    height: unset;
-    font-size: 1rem;
-  }
-  .header #cmap {
-    display: none;
-  }
-  .header__title {
-    position: unset;
-  }
-  .header__description {
-    position: unset;
-    margin: 1rem auto;
-    width: 80%;
-    height: unset;
-  }
-}
-
 .main {
   background-image: url("https://s2.loli.net/2022/06/07/Dej451T2gSvqWy8.jpg");
   background-size: contain;
@@ -252,22 +233,63 @@
   width: 50%;
 }
 
+.footer .info .logo > p {
+  width: 50%;
+  white-space: pre-line;
+  font-size: 0.8rem;
+}
+
 .footer .info .rel_link {
   -webkit-box-flex: 1;
       -ms-flex: 1 200px;
           flex: 1 200px;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .info .rel_link li {
+  list-style-type: none;
 }
 
 .footer .info .rel_link h3 {
   margin-top: 0;
 }
 
-.footer .info .rel_link ul {
-  padding: 0;
-  margin: 0;
-}
-
-.footer .info .rel_link ul li {
-  list-style-type: none;
+@media screen and (max-height: 800px), (max-width: 600px) {
+  .nav__logos {
+    margin: 0 auto;
+  }
+  .nav__list {
+    display: none;
+  }
+  .header {
+    height: unset;
+    font-size: 1rem;
+  }
+  .header #cmap {
+    display: none;
+  }
+  .header__title {
+    position: unset;
+  }
+  .header__description {
+    position: unset;
+    margin: 1rem auto;
+    width: 80%;
+    height: unset;
+  }
+  .location__btn {
+    text-align: center;
+  }
+  .footer .info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+  }
+  .footer .info .logo > p {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=main.css.map */
