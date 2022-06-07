@@ -337,6 +337,19 @@ permalink: /wtt2022
             }, 500);
             document.body.style.overflow = "auto";
 
+            /* nav btn event */
+            navBarsBtn = document.querySelector(".nav__bars");
+            navList = document.querySelector(".nav__list");
+            var navCollapse = true;
+            navBarsBtn.addEventListener("click", () => {
+                if (navCollapse) {
+                    navList.style.display = "block";
+                } else {
+                    navList.style.display = "none";
+                }
+                navCollapse = !navCollapse;
+            })
+
             initApp();
         };
     </script>
@@ -351,6 +364,7 @@ permalink: /wtt2022
         <div class="nav__logos">
             <a href="https://www.szu.edu.cn/"><img src="https://s2.loli.net/2022/06/07/qbaVtyH1K36peu5.png"></a>
         </div>
+        <i class="fa fa-bars nav__bars"></i>
         <ul class="nav__list">
             <li><a href="#metting">WTT2022</a></li>
             <li>会议议程</li>

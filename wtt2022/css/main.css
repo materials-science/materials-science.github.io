@@ -35,6 +35,10 @@
   padding: 0 1rem;
 }
 
+.nav__bars {
+  display: none;
+}
+
 .nav__logos {
   max-width: 12rem;
 }
@@ -261,11 +265,24 @@
 }
 
 @media screen and (max-height: 800px), (max-width: 600px) {
+  .nav {
+    display: block;
+    position: relative;
+    text-align: center;
+  }
   .nav__logos {
     margin: 0 auto;
   }
   .nav__list {
     display: none;
+  }
+  .nav__bars {
+    display: block;
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    width: 1rem;
+    height: 1rem;
   }
   .header {
     height: unset;
