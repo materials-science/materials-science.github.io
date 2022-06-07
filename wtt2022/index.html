@@ -8,6 +8,7 @@ permalink: /wtt2022
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
     <title>WTT2022 - IAS of SZU</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -15,111 +16,324 @@ permalink: /wtt2022
     <link rel="stylesheet" type="text/css" href="/wtt2022/css/main.css" media="screen">
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.js"></script>
     <script src="/wtt2022/js/china.js" type="text/javascript"></script>
+
+    <!--引入Javascript API GL，参数说明参见下文-->
+    <script src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ"></script>
+    <script charset="utf-8"
+        src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ&libraries=service"></script>
+    <script>
+        var map;
+        //定义地图中心点坐标
+        var center = new TMap.LatLng(22.554521, 114.242265)
+        function initApp() {
+            //地图初始化函数，本例取名为init，开发者可根据实际情况定义
+            function initMap() {
+                //定义map变量，调用 TMap.Map() 构造函数创建地图
+                map = new TMap.Map(document.getElementById('container'), {
+                    center: center,//设置地图中心点坐标
+                    zoom: 16.2,   //设置地图缩放级别,
+                    minZoom: 10,
+                    maxZoom: 17,
+                    pitch: 43.5,  //设置俯仰角
+                    rotation: 45    //设置地图旋转角度
+                });
+
+
+                //创建并初始化MultiMarker
+                var markerLayer = new TMap.MultiMarker({
+                    map: map,  //指定地图容器
+                    //样式定义
+                    styles: {
+                        //创建一个styleId为"myStyle"的样式（styles的子属性名即为styleId）
+                        "myStyle": new TMap.MarkerStyle({
+                            "width": 25,  // 点标记样式宽度（像素）
+                            "height": 35, // 点标记样式高度（像素）
+                            //焦点在图片中的像素位置，一般大头针类似形式的图片以针尖位置做为焦点，圆形点以圆心位置为焦点
+                            "anchor": { x: 16, y: 32 }
+                        })
+                    },
+                    //点标记数据数组
+                    geometries: [{
+                        "id": "1",   //点标记唯一标识，后续如果有删除、修改位置等操作，都需要此id
+                        "styleId": 'myStyle',  //指定样式id
+                        "position": new TMap.LatLng(22.553443, 114.24181),  //点标记坐标位置
+                        "properties": {//自定义属性
+                            "title": "雅庭海湾国际大酒店"
+                        }
+                    }, {//第二个点标记
+                        "id": "2",
+                        "styleId": 'marker',
+                        "position": new TMap.LatLng(22.553371, 114.24227),
+                        "properties": {
+                            "title": "地下停车场"
+                        }
+                    }
+                    ]
+                });
+                //定义事件处理方法
+                var clickHandler = function (evt) {
+                    var lat = evt.latLng.getLat().toFixed(6);
+                    var lng = evt.latLng.getLng().toFixed(6);
+                    console.log("您点击的的坐标是：" + lat + "," + lng);
+                }
+                //Map实例创建后，通过on方法绑定点击事件
+                map.on("click", clickHandler)
+            }
+
+            function initRoadMap(startPosition, endPosition) {
+                var ne = new TMap.LatLng(Math.max(
+                    startPosition.getLat(), endPosition.getLat()
+                ) * 1.0005, Math.max(
+                    startPosition.getLng(), endPosition.getLng()
+                ) * 1.0005);//东北角坐标
+                var sw = new TMap.LatLng(Math.min(
+                    startPosition.getLat(), endPosition.getLat()
+                ) * 0.9995, Math.min(
+                    startPosition.getLng(), endPosition.getLng()
+                ) * 0.9995);//西南角坐标
+
+                map = new TMap.Map("container", {
+                    minZoom: 10,
+                    maxZoom: 17,
+                    center: new TMap.LatLng(
+                        (startPosition.getLat() + endPosition.getLat()) / 2,
+                        (startPosition.getLng() + endPosition.getLng()) / 2
+                    ),
+                });
+
+                var latLngBounds = new TMap.LatLngBounds(sw, ne)
+                map.fitBounds(latLngBounds);
+
+                var marker = new TMap.MultiMarker({ // 创造MultiMarker显示起终点标记
+                    id: 'marker-layer',
+                    map: map,
+                    styles: {
+                        start: new TMap.MarkerStyle({
+                            width: 25,
+                            height: 35,
+                            anchor: { x: 16, y: 32 },
+                            src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/start.png',
+                        }),
+                        end: new TMap.MarkerStyle({
+                            width: 25,
+                            height: 35,
+                            anchor: { x: 16, y: 32 },
+                            src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/end.png',
+                        }),
+                    },
+                    geometries: [
+                        {
+                            id: 'start',
+                            styleId: 'start',
+                            position: startPosition,
+                        },
+                        {
+                            id: 'end',
+                            styleId: 'end',
+                            position: endPosition,
+                        },
+                    ],
+                });
+                var polylineLayer = new TMap.MultiPolyline({  // 创建 MultiPolyline显示路径折线
+                    map: map,
+                    styles: {
+                        'style_blue': new TMap.PolylineStyle({
+                            color: '#3777FF',
+                            width: 10,
+                            borderWidth: 0,
+                            showArrow: true,
+                            arrowOptions: {
+                                space: 70
+                            },
+                            lineCap: 'round',
+                        }),
+                    },
+                    geometries: [],
+                });
+                var transit = new TMap.service.Transit({ // 新建一个公交路线规划类
+                    policy: "LEAST_WALKING", // 规划策略
+                });
+                transit.search({ from: startPosition, to: endPosition }).then((result) => { //搜索路径
+                    var route = result.result.routes[0];
+                    var instructionContainer = document.getElementById('instruction');
+                    instructionContainer.innerHTML += "<h4>公交路线规划</h4>"
+                    var rainbowPaths = [];
+                    route.steps.forEach((step) => {
+                        if (step.mode === 'WALKING') {
+                            rainbowPaths.push({ path: step.polyline, color: 'rgba(51, 51, 255, 1)', }); //绘制步行路线
+                            instructionContainer.innerHTML += `<h5>步行（${step.duration}分钟）</h5>`;
+                            step.steps && step.steps.forEach((subStep, index) => {
+                                instructionContainer.innerHTML += `<p>${index + 1}. ${subStep.instruction}</p>` // 显示步行指引
+                            });
+                        }
+                        else {
+                            step.lines.forEach((line) => {
+
+                                if (line.vehicle === 'SUBWAY') {
+                                    rainbowPaths.push({ path: line.polyline, color: 'rgba(245, 185, 23, 1)' }); //绘制地铁路线
+                                } else {
+                                    rainbowPaths.push({ path: line.polyline, color: 'rgba(28, 204, 108, 1)' }); //绘制非地铁公交路线
+                                }
+                                instructionContainer.innerHTML += `<h5>搭乘<strong>${line.title}</strong>（<em>${line.duration}</em>分钟）</h5>`; // 显示搭乘指引
+                                instructionContainer.innerHTML += `<p>上车站：${line.geton.title}</p>`;
+                                instructionContainer.innerHTML += `<p>下车站：${line.getoff.title}</p>`;
+                            });
+                        }
+                    });
+                    polylineLayer.updateGeometries([{
+                        styleId: 'style_blue',
+                        rainbowPaths: rainbowPaths,
+                    }])
+                });
+            }
+
+            var szsBtn = document.querySelector("#roadSZS");
+            var sznBtn = document.querySelector("#roadSZN");
+            var szFTBtn = document.querySelector("#roadFT");
+            var szBABtn = document.querySelector("#roadBA");
+            var szuBtn = document.querySelector("#roadSZU");
+
+            var endPosition = new TMap.LatLng(22.553443, 114.24181); // 路线规划终点
+            szsBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.53168, 114.117209); // 路线规划起点
+
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            sznBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.610563, 114.030311); // 路线规划起点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            szFTBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.537952, 114.056851); // 路线规划起点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            szBABtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.629533, 113.815882); // 路线规划起点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            szuBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.532742, 113.936696); // 路线规划起点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+
+            !!map && map.destroy();
+            initMap();
+        }
+
+    </script>
+
     <script type="text/javascript">
         window.onload = function () {
             let cmap = document.querySelector("#cmap");
-
             cmap.style.width = window.innerWidth + "px";
             cmap.style.height = window.innerHeight / 2 + "px";
-            let chart = echarts.init(cmap);
-            chart.setOption({
-                geo: {
-                    map: 'china',
-                    silent: true,
-                    // 地图区域的样式设置
-                    itemStyle: {
-                        borderColor: "rgba(147, 235, 248, 1)",
-                        borderWidth: 1,
-                        areaColor: {
-                            type: "radial",
-                            x: 0.5,
-                            y: 0.5,
-                            r: 0.8,
-                            colorStops: [
-                                {
-                                    offset: 0,
-                                    color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+            if (cmap.clientHeight > 0) {
+                let chart = echarts.init(cmap);
+                chart.setOption({
+                    geo: {
+                        map: 'china',
+                        silent: true,
+                        // 地图区域的样式设置
+                        itemStyle: {
+                            borderColor: "rgba(147, 235, 248, 1)",
+                            borderWidth: 1,
+                            areaColor: {
+                                type: "radial",
+                                x: 0.5,
+                                y: 0.5,
+                                r: 0.8,
+                                colorStops: [
+                                    {
+                                        offset: 0,
+                                        color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+                                    },
+                                ],
+                                globalCoord: false, // 缺省为 false
+                            },
+                            shadowColor: "rgba(128, 217, 248, 1)",
+                            shadowOffsetX: -2,
+                            shadowOffsetY: 2,
+                            shadowBlur: 10,
+                        },
+                    },
+                    series: [
+                        {
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            symbol: "pin",
+                            legendHoverLink: true,
+                            symbolSize: [60, 60],
+                            // 标志的样式
+                            itemStyle: {
+                                color: "rgba(255,0,0,.7)",
+                                // shadowBlur: 2,
+                                shadowColor: "D8BC37",
+                            },
+                            label: {
+                                show: true,
+                                formatter(value) {
+                                    return value.name
                                 },
-                                {
-                                    offset: 1,
-                                    color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
-                                },
+                                color: "#fff",
+                            },
+                            data: [
+                                { name: "深圳", value: [114.03, 22.32] },
                             ],
-                            globalCoord: false, // 缺省为 false
-                        },
-                        shadowColor: "rgba(128, 217, 248, 1)",
-                        shadowOffsetX: -2,
-                        shadowOffsetY: 2,
-                        shadowBlur: 10,
-                    },
-                },
-                series: [
-                    {
-                        type: "scatter",
-                        coordinateSystem: "geo",
-                        symbol: "pin",
-                        legendHoverLink: true,
-                        symbolSize: [60, 60],
-                        // 标志的样式
-                        itemStyle: {
-                            color: "rgba(255,0,0,.7)",
-                            // shadowBlur: 2,
-                            shadowColor: "D8BC37",
-                        },
-                        label: {
-                            show: true,
-                            formatter(value) {
-                                return value.name
+                            showEffectOn: "render",
+                            rippleEffect: {
+                                brushType: "stroke",
                             },
-                            color: "#fff",
                         },
-                        data: [
-                            { name: "深圳", value: [114.03, 22.32] },
-                        ],
-                        showEffectOn: "render",
-                        rippleEffect: {
-                            brushType: "stroke",
-                        },
-                    },
-                    {
-                        type: "scatter",
-                        coordinateSystem: "geo",
-                        symbol: "pin",
-                        legendHoverLink: true,
-                        symbolSize: [50, 50],
-                        // 标志的样式
-                        itemStyle: {
-                            color: "rgba(255,165,0,.5)",
-                            shadowBlur: 2,
-                            shadowColor: "D8BC37",
-                        },
-                        label: {
-                            show: true,
-                            formatter(value) {
-                                return value.name
+                        {
+                            type: "scatter",
+                            coordinateSystem: "geo",
+                            symbol: "pin",
+                            legendHoverLink: true,
+                            symbolSize: [50, 50],
+                            // 标志的样式
+                            itemStyle: {
+                                color: "rgba(255,165,0,.5)",
+                                shadowBlur: 2,
+                                shadowColor: "D8BC37",
                             },
-                            color: "#fff",
-                        },
-                        data: [
-                            { name: "扬州", value: [119.26, 32.24] },
-                            { name: "厦门", value: [118.04, 24.26] },
-                            { name: "武汉", value: [113.41, 29.58] },
-                            { name: "青岛", value: [119.30, 35.35] },
-                            { name: "昆明", value: [102.10, 24.23] },
-                        ],
-                        showEffectOn: "render",
-                        rippleEffect: {
-                            brushType: "stroke",
-                        },
-                    }
-                ],
-            });
-
+                            label: {
+                                show: true,
+                                formatter(value) {
+                                    return value.name
+                                },
+                                color: "#fff",
+                            },
+                            data: [
+                                { name: "扬州", value: [119.26, 32.24] },
+                                { name: "厦门", value: [118.04, 24.26] },
+                                { name: "武汉", value: [113.41, 29.58] },
+                                { name: "青岛", value: [119.30, 35.35] },
+                                { name: "昆明", value: [102.10, 24.23] },
+                            ],
+                            showEffectOn: "render",
+                            rippleEffect: {
+                                brushType: "stroke",
+                            },
+                        }
+                    ],
+                });
+            }
             document.querySelector(".bgCover").style.opacity = 0
             setTimeout(() => {
                 document.querySelector(".bgCover").style.display = "none";
             }, 500);
             document.body.style.overflow = "auto";
+
+            initApp();
         };
     </script>
 </head>
@@ -131,7 +345,7 @@ permalink: /wtt2022
 
     <nav class="nav">
         <div class="nav__logos">
-            <a href="https://www.szu.edu.cn/"><img src="/wtt2022/images/SZU.png"></a>
+            <a href="https://www.szu.edu.cn/"><img src="https://s2.loli.net/2022/06/07/qbaVtyH1K36peu5.png"></a>
         </div>
         <ul class="nav__list">
             <li><a href="#metting">WTT2022</a></li>
@@ -233,56 +447,77 @@ permalink: /wtt2022
         <article class="location" id="location">
             <h2>交通指引</h2>
             <section>
-                <h3>福田站至雅庭海湾国际大酒店</h3>
-                <iframe src="/wtt2022/map.html" width="600" height="300" frameborder="0" scrolling="no"></iframe>
-            </section>
-            <section>
-                <h3>到达酒店地址的主要交通方式及乘车路线</h3>
-                <p>
-                    乘坐火车或飞机到达深圳后，距离会议地址最远路程约55公里，以下交通方案根据百度地图按照周一下午5点出行路况预测，仅供参考。各位参会代表路途辛苦，会务组不能安排接送，在此表示歉意。各位参会代表可根据需要参考以下推荐路线或自行查询安排出行。
-                </p>
-            </section>
-            <section>
-                <h3><i class="fa fa-road"></i>福田站 至 雅庭海湾国际大酒店</h3>
+                <h3>各交通枢纽 至 雅庭海湾国际大酒店</h3>
+                <!-- <iframe src="/wtt2022/map.html" width="600" height="300" frameborder="0" scrolling="no"></iframe> -->
+                <!-- <iframe src="/wtt2022/tmap.html" width="600" height="600" frameborder="0" scrolling="auto"></iframe> -->
+                <div class="location__box">
+                    <div class="location__btn">
+                        <span><i class="fa fa-map-marker margin-right-half"></i></span>
+                        <button id="roadSZS">深圳火车站</button>
+                        <button id="roadSZN">深圳北站</button>
+                        <button id="roadFT">深圳福田高铁站</button>
+                        <button id="roadBA">深圳宝安国际机场</button>
+                        <button id="roadSZU">深圳大学</button>
+                    </div>
+                    <!-- 定义地图显示容器 -->
+                    <div id="container" style="width: 600px; height: 300px;"></div>
+                    <div id="panel">
+                        <div id="instruction"></div>
+                    </div>
+                </div>
 
-                <h4>出租车线路</h4>
-                <p>
-                    费用约<em>60元</em>，用时约<em>45分钟</em>，全程约20.5公里。
-                </p>
-
-                <h4>地铁线路</h4>
-                <p>
-                    <strong>地铁8号线</strong>，票价<em>6元</em>，用时约<em>54分钟</em>
-                    ，全程约22.2公里。从福田地铁站出发，乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
-                </p>
-            </section>
-            <section>
-                <h3><i class="fa fa-road"></i>深圳北站 至 雅庭海湾国际大酒店</h3>
-
-                <h4>出租车线路</h4>
-                <p>
-                    费用约<em>86元</em>，用时约<em>50分钟</em>，全程约29.4公里。
-                </p>
-
-                <h4>地铁线路</h4>
-                <p>
-                    <strong>地铁5号线→地铁8号线</strong>，票价<em>7元</em>，用时约<em>1小时11分钟</em>，全程约32.9公里。从深圳北地铁站出发，乘地铁5号线（环中线）（往黄贝岭方向）至黄贝岭站，再转乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
-                </p>
             </section>
 
-            <section>
-                <h3><i class="fa fa-plane"></i>深圳宝安国际机场 至 雅庭海湾国际大酒店</h3>
+            <details style="padding: 1rem 0;cursor: pointer;">
+                <summary>无法加载地图？请<strong>点击查看文字指引</strong>：到达酒店地址的主要交通方式及乘车路线</summary>
+                <section>
+                    <h3>到达酒店地址的主要交通方式及乘车路线</h3>
+                    <p>
+                        乘坐火车或飞机到达深圳后，距离会议地址最远路程约55公里，以下交通方案根据百度地图按照周一下午5点出行路况预测，仅供参考。各位参会代表路途辛苦，会务组不能安排接送，在此表示歉意。各位参会代表可根据需要参考以下推荐路线或自行查询安排出行。
+                    </p>
+                </section>
+                <section>
+                    <h3><i class="fa fa-road"></i>福田站 至 雅庭海湾国际大酒店</h3>
 
-                <h4>出租车线路</h4>
-                <p>
-                    费用约<em>169元</em>，用时约<em>1小时9分钟</em>，全程约53.9公里。
-                </p>
+                    <h4>出租车线路</h4>
+                    <p>
+                        费用约<em>60元</em>，用时约<em>45分钟</em>，全程约20.5公里。
+                    </p>
 
-                <h4>地铁线路</h4>
-                <p>
-                    <strong>地铁11号线→地铁8号线</strong>，票价<em>10元</em>，用时约<em>1小时27分钟</em>，全程约53.4公里。在机场内搭乘地铁，在机场站乘坐地铁11号线（往福田方向）至福田站，站内换乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
-                </p>
-            </section>
+                    <h4>地铁线路</h4>
+                    <p>
+                        <strong>地铁8号线</strong>，票价<em>6元</em>，用时约<em>54分钟</em>
+                        ，全程约22.2公里。从福田地铁站出发，乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                    </p>
+                </section>
+                <section>
+                    <h3><i class="fa fa-road"></i>深圳北站 至 雅庭海湾国际大酒店</h3>
+
+                    <h4>出租车线路</h4>
+                    <p>
+                        费用约<em>86元</em>，用时约<em>50分钟</em>，全程约29.4公里。
+                    </p>
+
+                    <h4>地铁线路</h4>
+                    <p>
+                        <strong>地铁5号线→地铁8号线</strong>，票价<em>7元</em>，用时约<em>1小时11分钟</em>，全程约32.9公里。从深圳北地铁站出发，乘地铁5号线（环中线）（往黄贝岭方向）至黄贝岭站，再转乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                    </p>
+                </section>
+
+                <section>
+                    <h3><i class="fa fa-plane"></i>深圳宝安国际机场 至 雅庭海湾国际大酒店</h3>
+
+                    <h4>出租车线路</h4>
+                    <p>
+                        费用约<em>169元</em>，用时约<em>1小时9分钟</em>，全程约53.9公里。
+                    </p>
+
+                    <h4>地铁线路</h4>
+                    <p>
+                        <strong>地铁11号线→地铁8号线</strong>，票价<em>10元</em>，用时约<em>1小时27分钟</em>，全程约53.4公里。在机场内搭乘地铁，在机场站乘坐地铁11号线（往福田方向）至福田站，站内换乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                    </p>
+                </section>
+            </details>
         </article>
     </main>
 
@@ -290,7 +525,7 @@ permalink: /wtt2022
         <div class="split_line"></div>
         <div class="info">
             <div class="logo">
-                <img src="/wtt2022/images/IAS-h.png">
+                <img src="https://s2.loli.net/2022/06/07/O35EMl8csNJt2LD.png">
                 <p style="width: 50%;white-space: pre-line;font-size: .8rem;">
                     版权所有 © 深圳大学高等研究院
 

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Hello world!</title>
+    <style type="text/css">
+        #container {
+            /*地图(容器)显示大小*/
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+    <!--引入Javascript API GL，参数说明参见下文-->
+    <script src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ"></script>
+    <script charset="utf-8"
+        src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ&libraries=service"></script>
+    <script>
+        var map;
+        //定义地图中心点坐标
+        var center = new TMap.LatLng(22.554521, 114.242265)
+        function initApp() {
+            //地图初始化函数，本例取名为init，开发者可根据实际情况定义
+            function initMap() {
+                //定义map变量，调用 TMap.Map() 构造函数创建地图
+                map = new TMap.Map(document.getElementById('container'), {
+                    center: center,//设置地图中心点坐标
+                    zoom: 16.2,   //设置地图缩放级别,
+                    minZoom: 10,
+                    maxZoom: 17,
+                    pitch: 43.5,  //设置俯仰角
+                    rotation: 45    //设置地图旋转角度
+                });
+
+
+                //创建并初始化MultiMarker
+                var markerLayer = new TMap.MultiMarker({
+                    map: map,  //指定地图容器
+                    //样式定义
+                    styles: {
+                        //创建一个styleId为"myStyle"的样式（styles的子属性名即为styleId）
+                        "myStyle": new TMap.MarkerStyle({
+                            "width": 25,  // 点标记样式宽度（像素）
+                            "height": 35, // 点标记样式高度（像素）
+                            //焦点在图片中的像素位置，一般大头针类似形式的图片以针尖位置做为焦点，圆形点以圆心位置为焦点
+                            "anchor": { x: 16, y: 32 }
+                        })
+                    },
+                    //点标记数据数组
+                    geometries: [{
+                        "id": "1",   //点标记唯一标识，后续如果有删除、修改位置等操作，都需要此id
+                        "styleId": 'myStyle',  //指定样式id
+                        "position": new TMap.LatLng(22.553443, 114.24181),  //点标记坐标位置
+                        "properties": {//自定义属性
+                            "title": "雅庭海湾国际大酒店"
+                        }
+                    }, {//第二个点标记
+                        "id": "2",
+                        "styleId": 'marker',
+                        "position": new TMap.LatLng(22.553371, 114.24227),
+                        "properties": {
+                            "title": "地下停车场"
+                        }
+                    }
+                    ]
+                });
+                //定义事件处理方法
+                var clickHandler = function (evt) {
+                    var lat = evt.latLng.getLat().toFixed(6);
+                    var lng = evt.latLng.getLng().toFixed(6);
+                    console.log("您点击的的坐标是：" + lat + "," + lng);
+                }
+                //Map实例创建后，通过on方法绑定点击事件
+                map.on("click", clickHandler)
+            }
+
+            function initRoadMap(startPosition, endPosition) {
+                var ne = new TMap.LatLng(Math.max(
+                    startPosition.getLat(), endPosition.getLat()
+                ) * 1.0005, Math.max(
+                    startPosition.getLng(), endPosition.getLng()
+                ) * 1.0005);//东北角坐标
+                var sw = new TMap.LatLng(Math.min(
+                    startPosition.getLat(), endPosition.getLat()
+                ) * 0.9995, Math.min(
+                    startPosition.getLng(), endPosition.getLng()
+                ) * 0.9995);//西南角坐标
+
+                map = new TMap.Map("container", {
+                    minZoom: 10,
+                    maxZoom: 17,
+                    center: new TMap.LatLng(
+                        (startPosition.getLat() + endPosition.getLat()) / 2,
+                        (startPosition.getLng() + endPosition.getLng()) / 2
+                    ),
+                });
+
+                var latLngBounds = new TMap.LatLngBounds(sw, ne)
+                map.fitBounds(latLngBounds);
+
+                var marker = new TMap.MultiMarker({ // 创造MultiMarker显示起终点标记
+                    id: 'marker-layer',
+                    map: map,
+                    styles: {
+                        start: new TMap.MarkerStyle({
+                            width: 25,
+                            height: 35,
+                            anchor: { x: 16, y: 32 },
+                            src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/start.png',
+                        }),
+                        end: new TMap.MarkerStyle({
+                            width: 25,
+                            height: 35,
+                            anchor: { x: 16, y: 32 },
+                            src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/end.png',
+                        }),
+                    },
+                    geometries: [
+                        {
+                            id: 'start',
+                            styleId: 'start',
+                            position: startPosition,
+                        },
+                        {
+                            id: 'end',
+                            styleId: 'end',
+                            position: endPosition,
+                        },
+                    ],
+                });
+                var polylineLayer = new TMap.MultiPolyline({  // 创建 MultiPolyline显示路径折线
+                    map: map,
+                    styles: {
+                        'style_blue': new TMap.PolylineStyle({
+                            color: '#3777FF',
+                            width: 10,
+                            borderWidth: 0,
+                            showArrow: true,
+                            arrowOptions: {
+                                space: 70
+                            },
+                            lineCap: 'round',
+                        }),
+                    },
+                    geometries: [],
+                });
+                var transit = new TMap.service.Transit({ // 新建一个公交路线规划类
+                    policy: "LEAST_WALKING", // 规划策略
+                });
+                transit.search({ from: startPosition, to: endPosition }).then((result) => { //搜索路径
+                    var route = result.result.routes[0];
+                    var instructionContainer = document.getElementById('instruction');
+                    var rainbowPaths = [];
+                    route.steps.forEach((step) => {
+                        if (step.mode === 'WALKING') {
+                            rainbowPaths.push({ path: step.polyline, color: 'rgba(51, 51, 255, 1)', }); //绘制步行路线
+                            instructionContainer.innerHTML += `<h5>步行（${step.duration}分钟）</h5>`;
+                            step.steps && step.steps.forEach((subStep, index) => {
+                                instructionContainer.innerHTML += `<p>${index + 1}. ${subStep.instruction}</p>` // 显示步行指引
+                            });
+                        }
+                        else {
+                            step.lines.forEach((line) => {
+
+                                if (line.vehicle === 'SUBWAY') {
+                                    rainbowPaths.push({ path: line.polyline, color: 'rgba(245, 185, 23, 1)' }); //绘制地铁路线
+                                } else {
+                                    rainbowPaths.push({ path: line.polyline, color: 'rgba(28, 204, 108, 1)' }); //绘制非地铁公交路线
+                                }
+                                instructionContainer.innerHTML += `<h5>搭乘${line.title}（${line.duration}分钟）</h5>`; // 显示搭乘指引
+                                instructionContainer.innerHTML += `<p>上车站：${line.geton.title}</p>`;
+                                instructionContainer.innerHTML += `<p>下车站：${line.getoff.title}</p>`;
+                            });
+                        }
+                    });
+                    polylineLayer.updateGeometries([{
+                        styleId: 'style_blue',
+                        rainbowPaths: rainbowPaths,
+                    }])
+                });
+            }
+
+            var szsBtn = document.querySelector("#roadSZS");
+            var sznBtn = document.querySelector("#roadSZN");
+            szsBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.610563, 114.030311); // 路线规划起点
+                var endPosition = new TMap.LatLng(22.553443, 114.24181); // 路线规划终点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            sznBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.610563, 114.030311); // 路线规划起点
+                var endPosition = new TMap.LatLng(22.553443, 114.24181); // 路线规划终点
+                // !!map && map.destroy();
+
+                var ne = new TMap.LatLng(Math.max(
+                    startPosition.getLat(), endPosition.getLat()
+                ), Math.max(
+                    startPosition.getLng(), endPosition.getLng()
+                ));//东北角坐标
+                var sw = new TMap.LatLng(Math.min(
+                    startPosition.getLat(), endPosition.getLat()
+                ), Math.min(
+                    startPosition.getLng(), endPosition.getLng()
+                ));//西南角坐标
+                var latLngBounds = new TMap.LatLngBounds(sw, ne)
+                map.fitBounds(latLngBounds);
+            })
+
+            !!map && map.destroy();
+            initMap();
+        }
+
+    </script>
+</head>
+<!-- 页面载入后，调用init函数 -->
+
+<body onload="initApp()">
+    <div>
+        <button id="roadSZS">深圳火车站</button>
+        <button id="roadSZN">深圳北站</button>
+        <button>深圳福田高铁站</button>
+        <button>深圳宝安国际机场</button>
+        <button>深圳大学</button>
+    </div>
+    <!-- 定义地图显示容器 -->
+    <div id="container"></div>
+    <div id="panel">
+        <h4>公交路线规划</h4>
+        <div id="instruction"></div>
+    </div>
+</body>
+
+</html>

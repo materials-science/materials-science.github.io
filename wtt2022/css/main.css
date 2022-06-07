@@ -110,7 +110,7 @@
 
 .header__description::before {
   content: "";
-  background-image: url("/wtt2022/images/huarun.jpg");
+  background-image: url("https://s2.loli.net/2022/06/07/BbzFe6SsCYjvA7U.jpg");
   background-size: cover;
   position: absolute;
   display: block;
@@ -147,7 +147,7 @@
 }
 
 .main {
-  background-image: url("/wtt2022/images/szu-bg1.jpg");
+  background-image: url("https://s2.loli.net/2022/06/07/Dej451T2gSvqWy8.jpg");
   background-size: contain;
   background-repeat: repeat-y;
   overflow: hidden;
@@ -193,6 +193,30 @@
 
 .main .location > section > h3 > i {
   margin-right: 0.5rem;
+}
+
+.main .location__btn {
+  line-height: 2rem;
+}
+
+.main .location__btn button {
+  background: whitesmoke;
+  border: 0.1rem solid #950441;
+  border-radius: 0.2rem;
+  color: #950440;
+  cursor: pointer;
+}
+
+.main .location__btn button:hover {
+  color: whitesmoke;
+  -webkit-transition: background-color, color 0.5s;
+  transition: background-color, color 0.5s;
+  background-color: #950441;
+}
+
+.main .location__btn button:focus {
+  color: whitesmoke;
+  background-color: #950441;
 }
 
 .footer {
