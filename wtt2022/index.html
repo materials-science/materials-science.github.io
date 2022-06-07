@@ -160,7 +160,7 @@ permalink: /wtt2022
                 transit.search({ from: startPosition, to: endPosition }).then((result) => { //搜索路径
                     var route = result.result.routes[0];
                     var instructionContainer = document.getElementById('location__instruction');
-                    instructionContainer.innerHTML += "<h4>公交路线规划</h4>"
+                    instructionContainer.innerHTML = "<h4>公交路线规划</h4>"
                     var rainbowPaths = [];
                     route.steps.forEach((step) => {
                         if (step.mode === 'WALKING') {
