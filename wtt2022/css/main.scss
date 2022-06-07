@@ -90,7 +90,7 @@ $darkenBG: darken($bgColorDark, 10%);
 		overflow: hidden;
 		&::before {
 			content: "";
-			background-image: url("../images/huarun.jpg");
+			background-image: url("/wtt2022/images/huarun.jpg");
 			background-size: cover;
 			position: absolute;
 			display: block;
@@ -128,7 +128,7 @@ $darkenBG: darken($bgColorDark, 10%);
 }
 
 .main {
-	background-image: url("../images/szu-bg1.jpg");
+	background-image: url("/wtt2022/images/szu-bg1.jpg");
 	background-size: contain;
 	background-repeat: repeat-y;
 	overflow: hidden;
