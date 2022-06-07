@@ -85,6 +85,9 @@ permalink: /wtt2022
             }
 
             function initRoadMap(startPosition, endPosition) {
+                var instructionContainer = document.getElementById('location__instruction');
+                instructionContainer.innerHTML = '<h4 style="text-align:center;"><i class="fa fa-spinner fa-spin"></i></h4>';
+
                 var ne = new TMap.LatLng(Math.max(
                     startPosition.getLat(), endPosition.getLat()
                 ) * 1.0005, Math.max(
@@ -155,19 +158,18 @@ permalink: /wtt2022
                     geometries: [],
                 });
                 var transit = new TMap.service.Transit({ // 新建一个公交路线规划类
-                    policy: "LEAST_WALKING", // 规划策略
+                    policy: "RECOMMEND", // 规划策略
                 });
                 transit.search({ from: startPosition, to: endPosition }).then((result) => { //搜索路径
                     var route = result.result.routes[0];
-                    var instructionContainer = document.getElementById('location__instruction');
-                    instructionContainer.innerHTML = "<h4>公交路线规划</h4>"
+                    var transStr = "<h4>公交路线规划</h4>"
                     var rainbowPaths = [];
                     route.steps.forEach((step) => {
                         if (step.mode === 'WALKING') {
                             rainbowPaths.push({ path: step.polyline, color: 'rgba(51, 51, 255, 1)', }); //绘制步行路线
-                            instructionContainer.innerHTML += `<h5>步行（${step.duration}分钟）</h5>`;
+                            transStr += `<h5>步行（${step.duration}分钟）</h5>`;
                             step.steps && step.steps.forEach((subStep, index) => {
-                                instructionContainer.innerHTML += `<p>${index + 1}. ${subStep.instruction}</p>` // 显示步行指引
+                                transStr += `<p>${index + 1}. ${subStep.instruction}</p>` // 显示步行指引
                             });
                         }
                         else {
@@ -178,9 +180,9 @@ permalink: /wtt2022
                                 } else {
                                     rainbowPaths.push({ path: line.polyline, color: 'rgba(28, 204, 108, 1)' }); //绘制非地铁公交路线
                                 }
-                                instructionContainer.innerHTML += `<h5>搭乘<strong>${line.title}</strong>（<em>${line.duration}</em>分钟）</h5>`; // 显示搭乘指引
-                                instructionContainer.innerHTML += `<p>上车站：${line.geton.title}</p>`;
-                                instructionContainer.innerHTML += `<p>下车站：${line.getoff.title}</p>`;
+                                transStr += `<h5>搭乘<strong>${line.title}</strong>（<em>${line.duration}</em>分钟）</h5>`; // 显示搭乘指引
+                                transStr += `<p>上车站：${line.geton.title}</p>`;
+                                transStr += `<p>下车站：${line.getoff.title}</p>`;
                             });
                         }
                     });
@@ -188,6 +190,8 @@ permalink: /wtt2022
                         styleId: 'style_blue',
                         rainbowPaths: rainbowPaths,
                     }])
+
+                    instructionContainer.innerHTML = transStr;
                 });
             }
 
@@ -195,6 +199,7 @@ permalink: /wtt2022
             var sznBtn = document.querySelector("#roadSZN");
             var szFTBtn = document.querySelector("#roadFT");
             var szBABtn = document.querySelector("#roadBA");
+            var skBtn = document.querySelector("#roadSK");
             var szuBtn = document.querySelector("#roadSZU");
 
             var endPosition = new TMap.LatLng(22.553443, 114.24181); // 路线规划终点
@@ -221,6 +226,11 @@ permalink: /wtt2022
             })
             szuBtn.addEventListener("click", (e) => {
                 var startPosition = new TMap.LatLng(22.532742, 113.936696); // 路线规划起点
+                !!map && map.destroy();
+                initRoadMap(startPosition, endPosition);
+            })
+            skBtn.addEventListener("click", (e) => {
+                var startPosition = new TMap.LatLng(22.47571, 113.913151); // 路线规划起点
                 !!map && map.destroy();
                 initRoadMap(startPosition, endPosition);
             })
@@ -465,7 +475,7 @@ permalink: /wtt2022
         <article class="location" id="location">
             <h2>交通指引</h2>
             <section>
-                <h3>各交通枢纽 至 雅庭海湾国际大酒店</h3>
+                <h3>选择您的起点查看公交路线规划</h3>
                 <!-- <iframe src="/wtt2022/map.html" width="600" height="300" frameborder="0" scrolling="no"></iframe> -->
                 <!-- <iframe src="/wtt2022/tmap.html" width="600" height="600" frameborder="0" scrolling="auto"></iframe> -->
                 <div class="location__box">
@@ -475,6 +485,7 @@ permalink: /wtt2022
                         <button id="roadSZN">深圳北站</button>
                         <button id="roadFT">深圳福田高铁站</button>
                         <button id="roadBA">深圳宝安国际机场</button>
+                        <button id="roadSK">深圳蛇口港</button>
                         <button id="roadSZU">深圳大学</button>
                     </div>
                     <!-- 定义地图显示容器 -->

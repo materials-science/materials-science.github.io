@@ -233,7 +233,7 @@ $darkenBG: darken($bgColorDark, 10%);
 	}
 }
 
-@media screen and (max-height: 800px), (max-width: 600px) {
+@media screen and (max-height: 760px), (max-width: 540px) {
 	.nav {
 		&__logos {
 			margin: 0 auto;
