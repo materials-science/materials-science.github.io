@@ -83,6 +83,7 @@ panelbear_analytics: XXXXXXXXX # panelbear analytics site ID
 blog_name: Materials Computation & Modeling # your blog must have a name for it to show up in the nav bar
 blog_description: Materials Computation & Modeling Group of Shenzhen University - leading by Prof. Li Wu.
 permalink: /blog/:year/:title/
+show_blog: false
 
 # Pagination
 pagination:

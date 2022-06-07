@@ -3,7 +3,7 @@ layout: page
 title: Teaching
 permalink: /teaching/
 description: Giving Cources.
-nav: true
+# nav: true
 display_categories: [compulsory, optional]
 horizontal: true
 ---
