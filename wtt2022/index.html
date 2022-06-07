@@ -1,0 +1,319 @@
+---
+permalink: /wtt2022
+---
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>WTT2022 - IAS of SZU</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/main.css" media="screen">
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.js"></script>
+    <script src="js/china.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            let cmap = document.querySelector("#cmap");
+
+            cmap.style.width = window.innerWidth + "px";
+            cmap.style.height = window.innerHeight / 2 + "px";
+            let chart = echarts.init(cmap);
+            chart.setOption({
+                geo: {
+                    map: 'china',
+                    silent: true,
+                    // 地图区域的样式设置
+                    itemStyle: {
+                        borderColor: "rgba(147, 235, 248, 1)",
+                        borderWidth: 1,
+                        areaColor: {
+                            type: "radial",
+                            x: 0.5,
+                            y: 0.5,
+                            r: 0.8,
+                            colorStops: [
+                                {
+                                    offset: 0,
+                                    color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+                                },
+                                {
+                                    offset: 1,
+                                    color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+                                },
+                            ],
+                            globalCoord: false, // 缺省为 false
+                        },
+                        shadowColor: "rgba(128, 217, 248, 1)",
+                        shadowOffsetX: -2,
+                        shadowOffsetY: 2,
+                        shadowBlur: 10,
+                    },
+                },
+                series: [
+                    {
+                        type: "scatter",
+                        coordinateSystem: "geo",
+                        symbol: "pin",
+                        legendHoverLink: true,
+                        symbolSize: [60, 60],
+                        // 标志的样式
+                        itemStyle: {
+                            color: "rgba(255,0,0,.7)",
+                            // shadowBlur: 2,
+                            shadowColor: "D8BC37",
+                        },
+                        label: {
+                            show: true,
+                            formatter(value) {
+                                return value.name
+                            },
+                            color: "#fff",
+                        },
+                        data: [
+                            { name: "深圳", value: [114.03, 22.32] },
+                        ],
+                        showEffectOn: "render",
+                        rippleEffect: {
+                            brushType: "stroke",
+                        },
+                    },
+                    {
+                        type: "scatter",
+                        coordinateSystem: "geo",
+                        symbol: "pin",
+                        legendHoverLink: true,
+                        symbolSize: [50, 50],
+                        // 标志的样式
+                        itemStyle: {
+                            color: "rgba(255,165,0,.5)",
+                            shadowBlur: 2,
+                            shadowColor: "D8BC37",
+                        },
+                        label: {
+                            show: true,
+                            formatter(value) {
+                                return value.name
+                            },
+                            color: "#fff",
+                        },
+                        data: [
+                            { name: "扬州", value: [119.26, 32.24] },
+                            { name: "厦门", value: [118.04, 24.26] },
+                            { name: "武汉", value: [113.41, 29.58] },
+                            { name: "青岛", value: [119.30, 35.35] },
+                            { name: "昆明", value: [102.10, 24.23] },
+                        ],
+                        showEffectOn: "render",
+                        rippleEffect: {
+                            brushType: "stroke",
+                        },
+                    }
+                ],
+            });
+
+            document.querySelector(".bgCover").style.opacity = 0
+            setTimeout(() => {
+                document.querySelector(".bgCover").style.display = "none";
+            }, 500);
+            document.body.style.overflow = "auto";
+        };
+    </script>
+</head>
+
+<body style="overflow: hidden;">
+    <div class="bgCover">
+        <i class="fa fa-spin fa-spinner"></i>
+    </div>
+
+    <nav class="nav">
+        <div class="nav__logos">
+            <a href="https://www.szu.edu.cn/"><img src="./images/SZU.png"></a>
+        </div>
+        <ul class="nav__list">
+            <li><a href="#metting">WTT2022</a></li>
+            <li>会议议程</li>
+            <li><a href="#location">交通指引</a></li>
+        </ul>
+    </nav>
+    <header class="header">
+        <div id="cmap"></div>
+        <div class="header__title animate__animated animate__fadeInUp animate__delay-1s">
+            <h1>WTT2022</h1>
+            <h2>第七届全国热传导研讨会</h2>
+        </div>
+        <div class="header__description animate__animated animate__slideInRight animate__delay-1s">
+            <p style="white-space: pre-line;">近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。
+
+                在此背景下，国内外同行决定举办一年一度的“热传导研讨会”。该研讨会能够为国内从事热能科学及其交叉领域研究的师生提供很好的交流与合作平台。
+
+                目前该研讨会已成功举办六届：首届研讨会于2016年在南京师范大学举行；第二、三、四、五、六届分别由扬州大学、厦门大学和华侨大学、华中科技大学、青岛科技大学、昆明理工大学承办。</p>
+        </div>
+    </header>
+    <main class="main">
+        <article class="article notice" id="metting">
+            <h2>会议通知</h2>
+            <section class="notice__title">
+                <h3>
+                    第一轮会议通知
+                    <span><i class="fa fa-calendar"></i>2022年06月06日</span>
+                </h3>
+                <p>
+                    第七届全国热传导研讨会（WTT2022）将由深圳大学高等研究院承办。WTT2022将以线下方式举办，旨在为热输运领域的研究人员和研究生提供一个交流平台，围绕热传导及其交叉领域中的关键问题进行研讨交流，分享近来在理论、模拟、实验方面的进展。
+                </p>
+            </section>
+
+            <section class="notice__metting_date">
+                <h3>会议时间</h3>
+                <p>2022年07月30日——08月03日</p>
+            </section>
+
+            <section class="notice__metting_addr">
+                <h3>会议地点</h3>
+                <p>
+                    <a href="#location"><i class="fa fa-map-marker margin-right-half"></i>雅庭海湾国际大酒店（深圳市盐田区海山路2号）</a>
+                </p>
+            </section>
+
+            <section class="notice__metting_fee">
+                <h3>注册费用</h3>
+                <p>
+                    <span><i class="fa fa-dollar"></i></span>
+                </p>
+            </section>
+
+            <section class="notice__metting_concat">
+                <h3>会议联系人</h3>
+                <p>
+                    <span><i class="fa fa-user"></i>李武</span>
+                    <span><i class="fa fa-phone"></i>18565857258</span>
+                    <span><a href="mailto:wu.li@szu.edu.cn"><i class="fa fa-envelope"></i>wu.li@szu.edu.cn</a></span>
+                </p>
+            </section>
+
+            <section class="notice__metting_org">
+                <h3>会议组织</h3>
+                <p>
+                    <span>李武</span>
+                    <span>李晓光</span>
+                    <span>慈鹏弘</span>
+                    <span>Aymeric Ramiere</span>
+                    <span>杨小龙</span>
+                </p>
+            </section>
+
+            <section class="notice__metting_fee">
+                <h3>会议报道时间与地点</h3>
+                <p>
+                    <span>2022年07月30日全天，深圳雅庭海湾国际大酒店。</span>
+                </p>
+            </section>
+
+            <section class="notice__metting_fee">
+                <h3>其他事项</h3>
+                <p>
+                    <span>会议将根据回执情况发第二轮通知。</span>
+                </p>
+                <p>
+                    <span>会议计划线下举行，具体将视疫情发展，按照国家和深圳市规定执行。</span>
+                </p>
+            </section>
+        </article>
+
+        <article class="article schedule" id="schedule">
+            <h2>会议议程</h2>
+            <section>
+                <i class="fa fa-spinner fa-spin margin-right-half"></i>等待通知
+            </section>
+        </article>
+
+        <article class="location" id="location">
+            <h2>交通指引</h2>
+            <section>
+                <h3>福田站至雅庭海湾国际大酒店</h3>
+                <iframe src="map.html" width="600" height="300" frameborder="0" scrolling="no"></iframe>
+            </section>
+            <section>
+                <h3>到达酒店地址的主要交通方式及乘车路线</h3>
+                <p>
+                    乘坐火车或飞机到达深圳后，距离会议地址最远路程约55公里，以下交通方案根据百度地图按照周一下午5点出行路况预测，仅供参考。各位参会代表路途辛苦，会务组不能安排接送，在此表示歉意。各位参会代表可根据需要参考以下推荐路线或自行查询安排出行。
+                </p>
+            </section>
+            <section>
+                <h3><i class="fa fa-road"></i>福田站 至 雅庭海湾国际大酒店</h3>
+
+                <h4>出租车线路</h4>
+                <p>
+                    费用约<em>60元</em>，用时约<em>45分钟</em>，全程约20.5公里。
+                </p>
+
+                <h4>地铁线路</h4>
+                <p>
+                    <strong>地铁8号线</strong>，票价<em>6元</em>，用时约<em>54分钟</em>
+                    ，全程约22.2公里。从福田地铁站出发，乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                </p>
+            </section>
+            <section>
+                <h3><i class="fa fa-road"></i>深圳北站 至 雅庭海湾国际大酒店</h3>
+
+                <h4>出租车线路</h4>
+                <p>
+                    费用约<em>86元</em>，用时约<em>50分钟</em>，全程约29.4公里。
+                </p>
+
+                <h4>地铁线路</h4>
+                <p>
+                    <strong>地铁5号线→地铁8号线</strong>，票价<em>7元</em>，用时约<em>1小时11分钟</em>，全程约32.9公里。从深圳北地铁站出发，乘地铁5号线（环中线）（往黄贝岭方向）至黄贝岭站，再转乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                </p>
+            </section>
+
+            <section>
+                <h3><i class="fa fa-plane"></i>深圳宝安国际机场 至 雅庭海湾国际大酒店</h3>
+
+                <h4>出租车线路</h4>
+                <p>
+                    费用约<em>169元</em>，用时约<em>1小时9分钟</em>，全程约53.9公里。
+                </p>
+
+                <h4>地铁线路</h4>
+                <p>
+                    <strong>地铁11号线→地铁8号线</strong>，票价<em>10元</em>，用时约<em>1小时27分钟</em>，全程约53.4公里。在机场内搭乘地铁，在机场站乘坐地铁11号线（往福田方向）至福田站，站内换乘地铁8号线（往盐田路方向）至海山站，从B出口出发步行约600米到达酒店。
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="split_line"></div>
+        <div class="info">
+            <div class="logo">
+                <img src="./images/IAS-h.png">
+                <p style="width: 50%;white-space: pre-line;font-size: .8rem;">
+                    版权所有 © 深圳大学高等研究院
+
+                    地址：深圳市南山区南白石路深圳大学沧海校区高等研究院大楼（致知楼）703院办办公室 518060
+
+                    联系电话：0755-26530611
+                </p>
+            </div>
+            <ul class="rel_link">
+                <h3>相关链接</h3>
+                <li><a href="https://www.szu.edu.cn/">深圳大学</a></li>
+                <li><a href="https://ias.szu.edu.cn/">深圳大学高等研究院</a></li>
+                <li><a href="https://materials-science.github.io/">Materials Computation & Modeling</a></li>
+            </ul>
+        </div>
+        <!-- <div style="padding: 1rem 0">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <center>
+                浏览量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> | 访客数：<span
+                    id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>
+            </center>
+        </div> -->
+    </footer>
+</body>
+
+</html>
