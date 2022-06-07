@@ -80,8 +80,8 @@
 }
 
 .header #cmap {
-  -webkit-transform: rotateX(50deg) translateX(-25%) translateY(-15%) scale(1.2);
-          transform: rotateX(50deg) translateX(-25%) translateY(-15%) scale(1.2);
+  -webkit-transform: rotateX(50deg) translateX(-25%) translateY(-5%) scale(1.2);
+          transform: rotateX(50deg) translateX(-25%) translateY(-5%) scale(1.2);
 }
 
 .header__title {
@@ -98,19 +98,19 @@
   color: whitesmoke;
   position: absolute;
   right: 5%;
-  line-height: 50%;
+  line-height: 80%;
   top: 10%;
   width: 25%;
-  height: 80%;
   background-color: rgba(245, 245, 245, 0.3);
   border-radius: 1rem;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   overflow: hidden;
+  font-size: 0.8rem;
 }
 
 .header__description::before {
   content: "";
-  background-image: url("../images/huarun.jpg");
+  background-image: url("/wtt2022/images/huarun.jpg");
   background-size: cover;
   position: absolute;
   display: block;
@@ -130,7 +130,7 @@
 @media screen and (max-height: 800px), (max-width: 600px) {
   .header {
     height: unset;
-    min-height: 400px;
+    font-size: 1rem;
   }
   .header #cmap {
     display: none;
@@ -147,7 +147,7 @@
 }
 
 .main {
-  background-image: url("../images/szu-bg1.jpg");
+  background-image: url("/wtt2022/images/szu-bg1.jpg");
   background-size: contain;
   background-repeat: repeat-y;
   overflow: hidden;

@@ -64,7 +64,7 @@ $darkenBG: darken($bgColorDark, 10%);
 	height: 400px;
 
 	#cmap {
-		transform: rotateX(50deg) translateX(-25%) translateY(-15%) scale(1.2);
+		transform: rotateX(50deg) translateX(-25%) translateY(-5%) scale(1.2);
 	}
 
 	&__title {
@@ -80,14 +80,15 @@ $darkenBG: darken($bgColorDark, 10%);
 		color: whitesmoke;
 		position: absolute;
 		right: 5%;
-		line-height: 50%;
+		line-height: 80%;
 		top: 10%;
 		width: 25%;
-		height: 80%;
+		// height: 80%;
 		background-color: rgba($color: whitesmoke, $alpha: 0.3);
 		border-radius: 1rem;
-		padding: 0.5rem;
+		padding: 0 0.5rem;
 		overflow: hidden;
+		font-size: 0.8rem;
 		&::before {
 			content: "";
 			background-image: url("/wtt2022/images/huarun.jpg");
@@ -111,7 +112,8 @@ $darkenBG: darken($bgColorDark, 10%);
 @media screen and (max-height: 800px), (max-width: 600px) {
 	.header {
 		height: unset;
-		min-height: 400px;
+		// min-height: 400px;
+		font-size: 1rem;
 		#cmap {
 			display: none;
 		}
@@ -122,7 +124,7 @@ $darkenBG: darken($bgColorDark, 10%);
 			position: unset;
 			margin: 1rem auto;
 			width: 80%;
-            height: unset;
+			height: unset;
 		}
 	}
 }
