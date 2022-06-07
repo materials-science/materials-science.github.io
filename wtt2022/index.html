@@ -29,7 +29,7 @@ permalink: /wtt2022
             //地图初始化函数，本例取名为init，开发者可根据实际情况定义
             function initMap() {
                 //定义map变量，调用 TMap.Map() 构造函数创建地图
-                map = new TMap.Map(document.getElementById('container'), {
+                map = new TMap.Map(document.getElementById('location__container'), {
                     center: center,//设置地图中心点坐标
                     zoom: 16.2,   //设置地图缩放级别,
                     minZoom: 10,
@@ -92,7 +92,7 @@ permalink: /wtt2022
                     startPosition.getLng(), endPosition.getLng()
                 ) * 0.9995);//西南角坐标
 
-                map = new TMap.Map("container", {
+                map = new TMap.Map("location__container", {
                     minZoom: 10,
                     maxZoom: 17,
                     center: new TMap.LatLng(
@@ -155,7 +155,7 @@ permalink: /wtt2022
                 });
                 transit.search({ from: startPosition, to: endPosition }).then((result) => { //搜索路径
                     var route = result.result.routes[0];
-                    var instructionContainer = document.getElementById('instruction');
+                    var instructionContainer = document.getElementById('location__instruction');
                     instructionContainer.innerHTML += "<h4>公交路线规划</h4>"
                     var rainbowPaths = [];
                     route.steps.forEach((step) => {
@@ -460,9 +460,9 @@ permalink: /wtt2022
                         <button id="roadSZU">深圳大学</button>
                     </div>
                     <!-- 定义地图显示容器 -->
-                    <div id="container" style="width: 600px; height: 300px;"></div>
-                    <div id="panel">
-                        <div id="instruction"></div>
+                    <div id="location__container"></div>
+                    <div id="location__panel">
+                        <div id="location__instruction"></div>
                     </div>
                 </div>
 

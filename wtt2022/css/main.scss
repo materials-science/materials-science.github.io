@@ -179,6 +179,10 @@ $darkenBG: darken($bgColorDark, 10%);
 				}
 			}
 		}
+		&__container {
+			width: 600px;
+			height: 300px;
+		}
 	}
 }
 
@@ -252,8 +256,37 @@ $darkenBG: darken($bgColorDark, 10%);
 			height: unset;
 		}
 	}
-	.location__btn {
-		text-align: center;
+	.main {
+		.notice {
+			&__metting_concat {
+				> p {
+					display: flex;
+					flex-direction: column;
+					> span {
+						width: 100%;
+					}
+				}
+			}
+
+			&__metting_org {
+				> p {
+					display: flex;
+					flex-wrap: wrap;
+					> span {
+						width: unset;
+					}
+				}
+			}
+		}
+
+		.location {
+			&__btn {
+				text-align: center;
+			}
+			&__container {
+				width: 100%;
+			}
+		}
 	}
 
 	.footer {
