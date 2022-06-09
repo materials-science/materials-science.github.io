@@ -261,11 +261,11 @@ p {
   height: 300px;
 }
 
-.main .meeting_wj {
+.main .meeting__wj {
   padding: 1rem 0;
 }
 
-.main .meeting_wj summary {
+.main .meeting__wj summary {
   cursor: pointer;
 }
 
