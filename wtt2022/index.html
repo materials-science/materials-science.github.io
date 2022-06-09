@@ -18,7 +18,7 @@ permalink: /wtt2022
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/wtt2022/css/main.css" media="screen">
-    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
     <script src="/wtt2022/js/china.js" type="text/javascript"></script>
 
     <!--引入Javascript API GL，参数说明参见下文-->
@@ -41,7 +41,6 @@ permalink: /wtt2022
                     pitch: 43.5,  //设置俯仰角
                     rotation: 45    //设置地图旋转角度
                 });
-
 
                 //创建并初始化MultiMarker
                 var markerLayer = new TMap.MultiMarker({
@@ -74,14 +73,6 @@ permalink: /wtt2022
                     }
                     ]
                 });
-                //定义事件处理方法
-                var clickHandler = function (evt) {
-                    var lat = evt.latLng.getLat().toFixed(6);
-                    var lng = evt.latLng.getLng().toFixed(6);
-                    console.log("您点击的的坐标是：" + lat + "," + lng);
-                }
-                //Map实例创建后，通过on方法绑定点击事件
-                map.on("click", clickHandler)
             }
 
             function initRoadMap(startPosition, endPosition) {
@@ -361,6 +352,30 @@ permalink: /wtt2022
             })
 
             initApp();
+
+            /* documents */
+            mettingDocs = {
+                "title": "WTT2022",
+                "vice_title": "第七届全国热传导研讨会",
+                "description": "近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。\n在此背景下，国内外同行决定举办一年一度的“热传导研讨会”。该研讨会能够为国内从事热能科学及其交叉领域研究的师生提供很好的交流与合作平台。\n目前该研讨会已成功举办六届：首届研讨会于2016年在南京师范大学举行；第二、三、四、五、六届分别由扬州大学、厦门大学和华侨大学、华中科技大学、青岛科技大学、昆明理工大学承办。",
+                "metting_info": "第一轮会议通知<span><i class=\"fa fa-calendar\"></i>2022年06月06日</span>",
+                "metting_topic": ["声子学",
+                    "声子工程",
+                    "拓扑手性声子",
+                    "低维纳米传热",
+                    "量子热输运",
+                    "热超材料",
+                    "热蒸发",
+                    "热辐射",
+                    "柔性材料导热",
+                    "电池热管理",
+                    "传热与传质",
+                    "热物性测量",
+                    "热电转换",
+                    "热能利用与存储"],
+                "metting_date": "2022年07月30日——08月03日",
+                "metting_location": "雅庭海湾国际大酒店（深圳市盐田区海山路2号）"
+            }
         };
     </script>
 </head>
@@ -372,45 +387,74 @@ permalink: /wtt2022
 
     <nav class="nav">
         <div class="nav__logos">
-            <a href="https://www.szu.edu.cn/"><img src="https://s2.loli.net/2022/06/07/qbaVtyH1K36peu5.png"></a>
+            <a href="https://www.szu.edu.cn/">
+                <!-- <img src="https://s2.loli.net/2022/06/07/qbaVtyH1K36peu5.png"> -->
+                <img class="nav__logos__img--detail" src="https://s2.loli.net/2022/06/07/O35EMl8csNJt2LD.png">
+                <img class="nav__logos__img--logo" src="/wtt2022/images/ias.jpg">
+            </a>
+            <i class="fa fa-bars nav__bars"></i>
         </div>
-        <i class="fa fa-bars nav__bars"></i>
         <ul class="nav__list">
             <li><a href="#metting">WTT2022</a></li>
             <li>会议议程</li>
             <li><a href="#location">交通指引</a></li>
+            <li><a href="#meeting_wj">我要参会</a></li>
         </ul>
     </nav>
+
     <header class="header">
         <div id="cmap"></div>
         <div class="header__title animate__animated animate__fadeInUp animate__delay-1s">
-            <h1>WTT2022</h1>
-            <h2>第七届全国热传导研讨会</h2>
+            <h1 data-title>WTT2022</h1>
+            <h2 data-vice_title>第七届全国热传导研讨会</h2>
         </div>
         <div class="header__description animate__animated animate__slideInRight animate__delay-1s">
-            <p style="white-space: pre-line;">近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。
+            <p style="white-space: pre-line;" data-description>
+                近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。
 
                 在此背景下，国内外同行决定举办一年一度的“热传导研讨会”。该研讨会能够为国内从事热能科学及其交叉领域研究的师生提供很好的交流与合作平台。
 
                 目前该研讨会已成功举办六届：首届研讨会于2016年在南京师范大学举行；第二、三、四、五、六届分别由扬州大学、厦门大学和华侨大学、华中科技大学、青岛科技大学、昆明理工大学承办。</p>
         </div>
     </header>
+
     <main class="main">
         <article class="article notice" id="metting">
             <h2>会议通知</h2>
             <section class="notice__title">
-                <h3>
+                <h3 data-metting_info>
                     第一轮会议通知
                     <span><i class="fa fa-calendar"></i>2022年06月06日</span>
                 </h3>
-                <p>
+                <p data-metting_description>
                     第七届全国热传导研讨会（WTT2022）将由深圳大学高等研究院承办。WTT2022将以线下方式举办，旨在为热输运领域的研究人员和研究生提供一个交流平台，围绕热传导及其交叉领域中的关键问题进行研讨交流，分享近来在理论、模拟、实验方面的进展。
+                    我们诚挚邀请相关专家和研究人员出席本届全国热传导研讨会。
+                </p>
+            </section>
+
+            <section class="notice__metting_topic">
+                <h3>会议主题</h3>
+                <p data-metting_topic>
+                    <span>声子学</span>
+                    <span>声子工程</span>
+                    <span>拓扑手性声子</span>
+                    <span>低维纳米传热</span>
+                    <span>量子热输运</span>
+                    <span>热超材料</span>
+                    <span>热蒸发</span>
+                    <span>热辐射</span>
+                    <span>柔性材料导热</span>
+                    <span>电池热管理</span>
+                    <span>传热与传质</span>
+                    <span>热物性测量</span>
+                    <span>热电转换</span>
+                    <span>热能利用与存储</span>
                 </p>
             </section>
 
             <section class="notice__metting_date">
                 <h3>会议时间</h3>
-                <p>2022年07月30日——08月03日</p>
+                <p>2022年07月30日——2022年08月03日</p>
             </section>
 
             <section class="notice__metting_addr">
@@ -422,40 +466,102 @@ permalink: /wtt2022
 
             <section class="notice__metting_fee">
                 <h3>注册费用</h3>
-                <p>
-                    <span><i class="fa fa-dollar"></i></span>
+                <p>学生：1200元，教师：2000元。
+                    参会代表往返交通费及会议期间食宿费用自理。
+                    会务组已在参会酒店预订了数量充足的房间，房费450元/晚。届时，各参会代表完成注册报到后自行前往酒店前台登记住宿即可。</p>
+                <h3>付款方式</h3>
+                <p>深圳大学收取会议注册费并开具发票，支付账号如下：</p>
+                <p class="notice__metting_fee__ticket">户名：深圳大学
+                    银行：中国银行深圳深大支行
+                    账号：7484 6706 4612
+                    税号：1244 0300 4557 4531 64
+                    地址：深圳市南山区南海大道3688号深圳大学
+                    电话：075526536114
                 </p>
+                <p>线下会议注册费用现场缴纳。会务组将根据到款凭证安排会议日程，开具会议费发票。给各位代表造成的不便，还请谅解！</p>
+                <p>会议注册费发票可开具纸质发票和电子发票，开具明细为“会务费”。请参会代表在会议回执中填写发票信息。</p>
+            </section>
+
+            <section class="notice__metting_tips">
+                <h3>会议报告说明</h3>
+                <ol>
+                    <li>第七届全国热传导研讨会将采用线下举办。</li>
+                    <li>会议报告包括：大会报告(45分钟)，邀请报告(25–30分钟)，普通口头报告(12–15分钟)，海报报告(3分钟)。</li>
+                    <li>会议报告格式：口头报告PPT画面比例为16：9。会务组提供张贴海报支架要求的海报画面尺寸为80 cm(宽)×180 cm(高)。会务组提供张贴海报支持，各参会代表也可以自己携带海报易拉宝参会。
+                    </li>
+                    <li>海报报告特殊说明：仅支持线下海报报告(3分钟现场口头展示)和海报张贴展示。如需要海报张贴展示请联系会务组，邮寄海报至：广东省深圳市南山区南海大道3688号深圳大学沧海校区致知楼7楼学生办公室，邮编：518060，庞桂健，15889680048。会务组会安排海报张贴。
+                    </li>
+                    <li>请各位参会代表按通知提供参会回执，07月08日前填写以下会议回执或将回执用电子邮件发送至：wu.li@szu.edu.cn。</li>
+                </ol>
             </section>
 
             <section class="notice__metting_concat">
-                <h3>会议联系人</h3>
+                <h3>地方组织委员会</h3>
+                <h4>负责人</h4>
                 <p>
                     <span><i class="fa fa-user"></i>李武</span>
-                    <span><i class="fa fa-phone"></i>18565857258</span>
                     <span><a href="mailto:wu.li@szu.edu.cn"><i class="fa fa-envelope"></i>wu.li@szu.edu.cn</a></span>
                 </p>
-            </section>
-
-            <section class="notice__metting_org">
-                <h3>会议组织</h3>
                 <p>
-                    <span>李武</span>
-                    <span>李晓光</span>
-                    <span>慈鹏弘</span>
-                    <span>Aymeric Ramiere</span>
-                    <span>杨小龙</span>
+                    <span><i class="fa fa-user"></i>李保文</span>
+                </p>
+                <h4>成员</h4>
+                <p>
+                    <span><i class="fa fa-user"></i>李晓光</span>
+                    <span><a href="mailto:xgli@szu.edu.cn"><i class="fa fa-envelope"></i>xgli@szu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>慈鹏弘</span>
+                    <span><a href="mailto:ci@szu.edu.cn"><i class="fa fa-envelope"></i>ci@szu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>陈雅妮</span>
+                    <span><a href="mailto:chenyn@szu.edu.cn"><i class="fa fa-envelope"></i>chenyn@szu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>Aymeric Ramiere</span>
+                    <span><a href="mailto:ramiere@szu.edu.cn"><i
+                                class="fa fa-envelope"></i>ramiere@szu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>杨小龙</span>
+                    <span><a href="mailto:yangxl@cqu.edu.cn"><i class="fa fa-envelope"></i>yangxl@cqu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>谢杨苏</span>
+                    <span><a href="mailto:ysxie@szu.edu.cn"><i class="fa fa-envelope"></i>ysxie@szu.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>孙波</span>
+                    <span><a href="mailto:sun.bo@sz.tsinghua.edu.cn"><i
+                                class="fa fa-envelope"></i>sun.bo@sz.tsinghua.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>郭亮</span>
+                    <span><a href="mailto:guol3@sustech.edu.cn"><i
+                                class="fa fa-envelope"></i>guol3@sustech.edu.cn</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>庞桂健</span>
+                    <span><a href="mailto:1053254054@qq.com"><i class="fa fa-envelope"></i>1053254054@qq.com</a></span>
+                </p>
+                <p>
+                    <span><i class="fa fa-user"></i>张波</span>
+                    <span><a href="mailto:poryoung@outlook.com"><i
+                                class="fa fa-envelope"></i>poryoung@outlook.com</a></span>
                 </p>
             </section>
 
-            <section class="notice__metting_fee">
+            <section class="notice__metting_date">
                 <h3>会议报道时间与地点</h3>
-                <p>
-                    <span>2022年07月30日全天，深圳雅庭海湾国际大酒店。</span>
-                </p>
+                <p><span>2022年07月30日全天，深圳雅庭海湾国际大酒店。</span></p>
             </section>
 
-            <section class="notice__metting_fee">
+            <section class="notice__metting_others">
                 <h3>其他事项</h3>
+                <p>
+                    请参会代表于07月08日前完整填写<a href="#meeting_wj">参会回执</a>，尤其是填写注明报告形式(口头/海报)、报告题目、报告时间要求，以便会务组尽快安排会议日程。
+                </p>
                 <p>
                     <span>会议将根据回执情况发第二轮通知。</span>
                 </p>
@@ -548,20 +654,25 @@ permalink: /wtt2022
                 </section>
             </details>
         </article>
+
+        <article id="meeting_wj" class="meeting_wj">
+            <h2>会议回执</h2>
+            <details>
+                <summary>填写参会信息</summary>
+                <script type='text/javascript'
+                    src='https://www.wjx.top/handler/jqemed.ashx?activity=miVAS96&width=795&source=iframe&tm=1&sm=t'></script>
+            </details>
+        </article>
     </main>
 
     <footer class="footer">
         <div class="split_line"></div>
         <div class="info">
             <div class="logo">
-                <img src="https://s2.loli.net/2022/06/07/O35EMl8csNJt2LD.png">
-                <p>
-                    版权所有 © 深圳大学高等研究院
-
-                    地址：深圳市南山区南白石路深圳大学沧海校区高等研究院大楼（致知楼）703院办办公室 518060
-
-                    联系电话：0755-26530611
-                </p>
+                <!-- <img src="https://s2.loli.net/2022/06/07/O35EMl8csNJt2LD.png"> -->
+                <p>版权所有 © 深圳大学高等研究院</p>
+                <p>地址：深圳市南山区南白石路深圳大学沧海校区高等研究院大楼（致知楼）703院办办公室 518060</p>
+                <p>联系电话：0755-26530611</p>
             </div>
             <ul class="rel_link">
                 <h3>相关链接</h3>
