@@ -262,10 +262,11 @@ p {
 }
 
 .main .meeting__wj {
-  padding: 1rem 0;
+  margin-bottom: 1rem;
 }
 
 .main .meeting__wj summary {
+  padding: 1rem 0;
   cursor: pointer;
 }
 
