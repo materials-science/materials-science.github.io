@@ -30,6 +30,7 @@ p {
 	font-size: 3rem;
 	text-align: center;
 	line-height: 100vh;
+	color: $bgColorSZU;
 }
 
 .margin-right-half {
@@ -116,7 +117,6 @@ p {
 		border-radius: 1rem;
 		padding: 0 0.5rem;
 		overflow: hidden;
-		font-size: 0.9rem;
 		&::before {
 			content: "";
 			background-image: url("https://s2.loli.net/2022/06/07/BbzFe6SsCYjvA7U.jpg");
@@ -286,6 +286,11 @@ p {
 			margin: 0;
 			li {
 				list-style-type: none;
+				line-height: 1.5rem;
+				a {
+					color: $bgColorSZU;
+					text-decoration: none;
+				}
 			}
 			h3 {
 				margin-top: 0;
@@ -335,9 +340,10 @@ p {
 	}
 	.header {
 		height: unset;
-		// min-height: 400px;
-		font-size: 1rem;
 		#cmap {
+			display: none;
+		}
+		#tag_cloud {
 			display: none;
 		}
 		&__title {

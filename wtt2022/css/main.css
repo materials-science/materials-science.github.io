@@ -15,6 +15,7 @@ p {
   font-size: 3rem;
   text-align: center;
   line-height: 100vh;
+  color: #950441;
 }
 
 .margin-right-half {
@@ -125,7 +126,6 @@ p {
   border-radius: 1rem;
   padding: 0 0.5rem;
   overflow: hidden;
-  font-size: 0.9rem;
 }
 
 .header__description::before {
@@ -319,6 +319,12 @@ p {
 
 .footer .info .rel_link li {
   list-style-type: none;
+  line-height: 1.5rem;
+}
+
+.footer .info .rel_link li a {
+  color: #950441;
+  text-decoration: none;
 }
 
 .footer .info .rel_link h3 {
@@ -362,9 +368,11 @@ p {
   }
   .header {
     height: unset;
-    font-size: 1rem;
   }
   .header #cmap {
+    display: none;
+  }
+  .header #tag_cloud {
     display: none;
   }
   .header__title {
