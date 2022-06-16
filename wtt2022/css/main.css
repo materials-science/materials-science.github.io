@@ -1,5 +1,30 @@
+:root {
+  --bg-color-sze-str: 149, 4, 65;
+}
+
 p {
   line-height: 1.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+  background-color: rgba(149, 4, 65, 0);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--bg-color-sze-str), 0.5);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(var(--bg-color-sze-str), 0.9) !important;
 }
 
 .bgCover {
@@ -20,6 +45,10 @@ p {
 
 .margin-right-half {
   margin-right: 0.5rem;
+}
+
+.margin-left-half {
+  margin-left: 0.5rem;
 }
 
 .nav {

@@ -18,14 +18,79 @@ permalink: /wtt2022
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/wtt2022/css/main.css" media="screen">
+    <style>
+        .tag_cloud {
+            position: absolute;
+            width: 25%;
+            height: 50%;
+            top: 25%;
+            left: 5%;
+        }
+
+        .tag_cloud a {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            padding: 11px 30px;
+            color: white;
+            font-size: 16px;
+            border: 1px solid #e6e7e8;
+            border-radius: 18px;
+            text-decoration: none;
+            white-space: nowrap;
+            -o-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+            -ms-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+            -moz-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+            -webkit-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+            box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135, Color='#000000')";
+            /*兼容ie7/8*/
+            filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=125, Strength=9);
+            /*strength是阴影大小，direction是阴影方位，单位为度，可以为负数，color是阴影颜色 （尽量使用数字）使用IE滤镜实现盒子阴影的盒子必须是行元素或以行元素显示（block或inline-block;）*/
+
+            transition: tranform .5s;
+            background-color: rgba(255, 255, 255, .5);
+        }
+
+        .tag_cloud a:hover {
+            color: #3385cf;
+            background-color: #f2f4f8;
+        }
+    </style>
+    <script type="text/javascript">
+        /* documents */
+        const mettingDocs = {
+            "title": "WTT2022",
+            "vice_title": "第七届全国热传导研讨会",
+            "description": "近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。\n在此背景下，国内外同行决定举办一年一度的“热传导研讨会”。该研讨会能够为国内从事热能科学及其交叉领域研究的师生提供很好的交流与合作平台。\n目前该研讨会已成功举办六届：首届研讨会于2016年在南京师范大学举行；第二、三、四、五、六届分别由扬州大学、厦门大学和华侨大学、华中科技大学、青岛科技大学、昆明理工大学承办。",
+            "metting_info": "第一轮会议通知<span><i class=\"fa fa-calendar\"></i>2022年06月06日</span>",
+            "metting_topic": ["声子学",
+                "声子工程",
+                "拓扑手性声子",
+                "低维纳米传热",
+                "量子热输运",
+                "热超材料",
+                "热蒸发",
+                "热辐射",
+                "柔性材料导热",
+                "电池热管理",
+                "传热与传质",
+                "热物性测量",
+                "热电转换",
+                "热能利用与存储"],
+            "metting_date": "2022年08月06日——08月09日",
+            "metting_location": "雅庭海湾国际大酒店（深圳市盐田区海山路2号）"
+        };
+    </script>
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
     <script src="/wtt2022/js/china.js" type="text/javascript"></script>
-
     <!--引入Javascript API GL，参数说明参见下文-->
     <script src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ"></script>
     <script charset="utf-8"
         src="https://map.qq.com/api/gljs?v=1.exp&key=YPHBZ-76SED-BRG4Y-HTCTD-YVTXO-TCFZQ&libraries=service"></script>
-    <script>
+    <script type="text/javascript">
         var map;
         //定义地图中心点坐标
         var center = new TMap.LatLng(22.554521, 114.242265)
@@ -230,9 +295,6 @@ permalink: /wtt2022
             initMap();
         }
 
-    </script>
-
-    <script type="text/javascript">
         window.onload = function () {
             /* Load Header Map */
             let cmap = document.querySelector("#cmap");
@@ -333,11 +395,6 @@ permalink: /wtt2022
                     ],
                 });
             }
-            document.querySelector(".bgCover").style.opacity = 0
-            setTimeout(() => {
-                document.querySelector(".bgCover").style.display = "none";
-            }, 500);
-            document.body.style.overflow = "auto";
 
             /* nav btn event */
             navBarsBtn = document.querySelector(".nav__bars");
@@ -353,31 +410,7 @@ permalink: /wtt2022
             })
 
             /* Load Tencent Map */
-            initApp();
-
-            /* documents */
-            mettingDocs = {
-                "title": "WTT2022",
-                "vice_title": "第七届全国热传导研讨会",
-                "description": "近年来热传导研究在凝聚态物理、统计物理、工程热物理、导热材料等领域取得了长足的进展，研究学者们也提出了很多新的科学问题。\n在此背景下，国内外同行决定举办一年一度的“热传导研讨会”。该研讨会能够为国内从事热能科学及其交叉领域研究的师生提供很好的交流与合作平台。\n目前该研讨会已成功举办六届：首届研讨会于2016年在南京师范大学举行；第二、三、四、五、六届分别由扬州大学、厦门大学和华侨大学、华中科技大学、青岛科技大学、昆明理工大学承办。",
-                "metting_info": "第一轮会议通知<span><i class=\"fa fa-calendar\"></i>2022年06月06日</span>",
-                "metting_topic": ["声子学",
-                    "声子工程",
-                    "拓扑手性声子",
-                    "低维纳米传热",
-                    "量子热输运",
-                    "热超材料",
-                    "热蒸发",
-                    "热辐射",
-                    "柔性材料导热",
-                    "电池热管理",
-                    "传热与传质",
-                    "热物性测量",
-                    "热电转换",
-                    "热能利用与存储"],
-                "metting_date": "2022年07月30日——08月03日",
-                "metting_location": "雅庭海湾国际大酒店（深圳市盐田区海山路2号）"
-            }
+            // initApp();
 
             function initTagCloud(radius /* 标签云半径 */,
                 tspeed /* 标签运动速度 */) {
@@ -543,50 +576,29 @@ permalink: /wtt2022
             }
             /* Load tag cloud */
             if (cmap.clientHeight > 0) {
-                initTagCloud(document.querySelector("#tag_cloud").clientHeight * 0.5, 5);
+                let tagsDom = document.querySelector("#tag_cloud");
+                !!mettingDocs.metting_topic && mettingDocs.metting_topic.forEach((item) => {
+                    let a = document.createElement("a");
+                    a.innerHTML = item;
+                    tagsDom.appendChild(a);
+                })
+
+                initTagCloud(tagsDom.clientHeight * 0.5, 5);
             }
+
+            /* hidden loading bg */
+            (($) => {
+                setTimeout(() => {
+                    $.querySelector(".bgCover").style.opacity = 0
+                    setTimeout(() => {
+                        $.querySelector(".bgCover").style.display = "none";
+                    }, 500);
+                    $.body.style.overflow = "auto";
+                }, 1000)
+
+            })(document);
         };
     </script>
-    <style>
-        .tag_cloud {
-            position: absolute;
-            width: 25%;
-            height: 50%;
-            top: 25%;
-            left: 5%;
-        }
-
-        .tag_cloud a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            padding: 11px 30px;
-            color: white;
-            font-size: 16px;
-            border: 1px solid #e6e7e8;
-            border-radius: 18px;
-            text-decoration: none;
-            white-space: nowrap;
-            -o-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
-            -ms-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
-            -moz-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
-            -webkit-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
-            box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
-            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135, Color='#000000')";
-            /*兼容ie7/8*/
-            filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=125, Strength=9);
-            /*strength是阴影大小，direction是阴影方位，单位为度，可以为负数，color是阴影颜色 （尽量使用数字）使用IE滤镜实现盒子阴影的盒子必须是行元素或以行元素显示（block或inline-block;）*/
-
-            transition: tranform .5s;
-            background-color: rgba(255, 255, 255, .5);
-        }
-
-        .tag_cloud a:hover {
-            color: #3385cf;
-            background-color: #f2f4f8;
-        }
-    </style>
 </head>
 
 <body style="overflow: hidden;">
@@ -607,14 +619,14 @@ permalink: /wtt2022
             <li><a href="#metting">WTT2022</a></li>
             <li>会议议程</li>
             <li><a href="#location">交通指引</a></li>
-            <li><a href="#meeting__wj">我要参会</a></li>
+            <li><a href="#meeting__wj">会议注册</a></li>
         </ul>
     </nav>
 
     <header class="header">
         <div id="cmap"></div>
         <div id="tag_cloud" class="tag_cloud">
-            <a href="https://ias.szu.edu.cn/">深圳大学高等研究院</a>
+            <!-- <a href="https://ias.szu.edu.cn/">深圳大学高等研究院</a>
             <a href="http://cpoe.szu.edu.cn/">深圳大学物理与光电工程学院</a>
             <a href="http://mse.sustech.edu.cn/">南方科技大学材料科学与工程系</a>
             <a href="http://phys.cqu.edu.cn/">重庆大学物理学院</a>
@@ -622,7 +634,7 @@ permalink: /wtt2022
             <a href="http://www.yzu.edu.cn/">扬州大学</a>
             <a href="https://www.xmu.edu.cn/">厦门大学</a>
             <a href="https://www.hust.edu.cn/">华中科技大学</a>
-            <a href="https://www.qust.edu.cn/">昆明理工大学</a>
+            <a href="https://www.qust.edu.cn/">昆明理工大学</a> -->
         </div>
         <div class="header__title animate__animated animate__fadeInUp animate__delay-1s">
             <h1 data-title>WTT2022</h1>
@@ -641,7 +653,7 @@ permalink: /wtt2022
             <section class="notice__title">
                 <h3 data-metting_info>
                     第一轮会议通知
-                    <span><i class="fa fa-calendar"></i>2022年06月06日</span>
+                    <span><i class="fa fa-calendar"></i>2022年06月16日</span>
                 </h3>
                 <p data-metting_description>
                     第七届全国热传导研讨会（WTT2022）将由深圳大学高等研究院承办。WTT2022将以线下方式举办，旨在为热输运领域的研究人员和研究生提供一个交流平台，围绕热传导及其交叉领域中的关键问题进行研讨交流，分享近来在理论、模拟、实验方面的进展。
@@ -671,7 +683,7 @@ permalink: /wtt2022
 
             <section class="notice__metting_date">
                 <h3>会议时间</h3>
-                <p>2022年07月30日——2022年08月03日</p>
+                <p>2022年08月06日——2022年08月09日</p>
             </section>
 
             <section class="notice__metting_addr">
@@ -683,7 +695,7 @@ permalink: /wtt2022
 
             <section class="notice__metting_fee">
                 <h3>注册费用</h3>
-                <p>学生：1200元，教师：2000元。
+                <p>学生：1200元，教师：1800元，企业代表：2500元
                     参会代表往返交通费及会议期间食宿费用自理。
                     会务组已在参会酒店预订了数量充足的房间，房费450元/晚。届时，各参会代表完成注册报到后自行前往酒店前台登记住宿即可。</p>
                 <h3>付款方式</h3>
@@ -708,7 +720,7 @@ permalink: /wtt2022
                     </li>
                     <li>海报报告特殊说明：仅支持线下海报报告(3分钟现场口头展示)和海报张贴展示。如需要海报张贴展示请联系会务组，邮寄海报至：广东省深圳市南山区南海大道3688号深圳大学沧海校区致知楼7楼学生办公室，邮编：518060，庞桂健，15889680048。会务组会安排海报张贴。
                     </li>
-                    <li>请各位参会代表按通知提供参会回执，07月08日前填写以下会议回执或将回执用电子邮件发送至：wu.li@szu.edu.cn。</li>
+                    <li>请各位参会代表按通知提供参会回执，07月13日前填写以下会议回执或将回执用电子邮件发送至：wu.li@szu.edu.cn。</li>
                 </ol>
             </section>
 
@@ -768,11 +780,16 @@ permalink: /wtt2022
                     <span><a href="mailto:poryoung@outlook.com"><i
                                 class="fa fa-envelope"></i>poryoung@outlook.com</a></span>
                 </p>
+                <p>
+                    <span><i class="fa fa-user"></i>韦宝杰</span>
+                    <span><a href="mailto:weibj@sustech.edu.cn"><i
+                                class="fa fa-envelope"></i>weibj@sustech.edu.cn</a></span>
+                </p>
             </section>
 
             <section class="notice__metting_date">
                 <h3>会议报道时间与地点</h3>
-                <p><span>2022年07月30日全天，深圳雅庭海湾国际大酒店。</span></p>
+                <p><span>2022年08月06日全天，深圳雅庭海湾国际大酒店。</span></p>
             </section>
 
             <section class="notice__metting_others">
@@ -875,7 +892,7 @@ permalink: /wtt2022
         <article id="meeting__wj" class="meeting__wj">
             <h2>会议回执</h2>
             <details open>
-                <summary>填写参会信息</summary>
+                <summary>填写参会信息<span><i class="fa fa-calendar margin-left-half margin-right-half"></i>注册截止：2022年07月13日</span></summary>
                 <div class="meeting__wj--wjx">
                     <script type='text/javascript'
                         src='https://www.wjx.top/handler/jqemed.ashx?activity=miVAS96&width=795&source=iframe&tm=1&sm=t'></script>
@@ -896,20 +913,23 @@ permalink: /wtt2022
             <ul class="rel_link">
                 <h3>相关链接</h3>
                 <li><a href="https://ias.szu.edu.cn/">深圳大学高等研究院</a></li>
-                <li><a href="http://cpoe.szu.edu.cn/">深圳大学物理与光电工程学院</a></li>
-                <li><a href="http://mse.sustech.edu.cn/">南方科技大学材料科学与工程系</a></li>
-                <li><a href="http://phys.cqu.edu.cn/">重庆大学物理学院</a></li>
-                <li><a href="https://www.sigs.tsinghua.edu.cn/">清华大学深圳国际研究生院</a></li>
+                <!-- <li><a href="http://cpoe.szu.edu.cn/">深圳大学物理与光电工程学院</a></li> -->
+                <!-- <li><a href="http://mse.sustech.edu.cn/">南方科技大学材料科学与工程系</a></li> -->
+                <!-- <li><a href="http://phys.cqu.edu.cn/">重庆大学物理学院</a></li> -->
+                <!-- <li><a href="https://www.sigs.tsinghua.edu.cn/">清华大学深圳国际研究生院</a></li> -->
                 <li><a href="https://materials-science.github.io/">Materials Computation & Modeling</a></li>
             </ul>
         </div>
-        <!-- <div style="padding: 1rem 0">
-            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <center>
-                浏览量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> | 访客数：<span
-                    id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span>
-            </center>
-        </div> -->
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?c946e43019e97ad767878e4d06d4e57b";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+
     </footer>
 </body>
 
