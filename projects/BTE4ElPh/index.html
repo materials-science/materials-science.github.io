@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>
-    <meta http-equiv="refresh" content="3; url=https://materials-science.github.io//" />
+    
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
   Materials Computation & Modeling
 
 
-  | Page not found
+  | BTE4ElPh
 
 </title>
 <meta name="description" content="Materials Computation & Modeling Group of Shenzhen University - leading by Prof. Li Wu.
@@ -39,7 +39,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="https://materials-science.github.io/404.html">
+<link rel="canonical" href="https://materials-science.github.io/projects/BTE4ElPh/">
 
 
 <!-- Dark Mode -->
@@ -159,13 +159,15 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Page not found</h1>
-    <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
+    <h1 class="post-title">BTE4ElPh</h1>
+    <p class="post-description">计算周期性体系中受电子声子（el-ph）耦合限制的电输运性质</p>
     
   </header>
 
   <article>
-    <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://materials-science.github.io//">here</a>.</p>
+    <p>BTE4ElPh 使用玻尔兹曼输运方程（BTE）来计算周期性体系中受电子声子（el-ph）耦合限制的电输运性质。软件通过密度泛函理论方法，Wannier 插值算法和迭代方法不依赖任何经验参数精确求解 BTE，同时还提供弛豫时间近似（RTA）和动量弛豫时间近似（MRTA）求解。当前的功能包括电子传导率，迁移率，塞贝克系数和电子导热率的计算。除此之外，还可以获得一些有用的相关性质，包括 el-ph 散射率（电子寿命的倒数），平均自由程，声子-电子散射强度，Eliashberg 光谱函数及其在金属体系中的输运变量。</p>
+
+<p>目前，BTE4ElPh 与含有 EPW 模块的 Quantum ESPRESSO（QE）软件包接口，源代码可以通过在 Linux 中运行 make 命令来被编译。如果编译成功，则会创建一个 BTE4ElPh 二进制文件。要运行 BTE4ElPh，首先需要一些在 QE 中执行计算得到的数据文件作为输入，然后需要一个 CONTROL 文件来调控求解 BTE 过程的参数。</p>
 
   </article>
 
